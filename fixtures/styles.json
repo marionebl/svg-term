@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "width": 80,
+  "height": 24,
+  "duration": 6.685402,
+  "command": null,
+  "title": null,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/usr/local/bin/fish"
+  },
+  "stdout": [
+    [
+      0.0001,
+      "\u001b[34mHello\u001b[39mWorld\u001b[31m!\u001b[39m\r\n\u001b[34m\u001b[41m\u001b[1mHello world!\u001b[22m\u001b[49m\u001b[39m\r\n\u001b[34mHello World! Foo bar biz baz\u001b[39m\r\n\u001b[31mHello \u001b[4m\u001b[44mworld\u001b[49m\u001b[24m!\u001b[39m\r\n\u001b[32mI am a green line \u001b[34m\u001b[4m\u001b[1mwith a blue substring\u001b[22m\u001b[24m\u001b[32m that becomes green again!\u001b[39m\r\n\u001b[38;2;255;165;0mYay for orange colored text!\u001b[39m\r\n\u001b[38;2;123;45;67m\u001b[4mUnderlined reddish color\u001b[24m\u001b[39m\r\n\u001b[38;2;222;173;237m\u001b[1mBold gray!\u001b[22m\u001b[39m\r\n\u001b[?2004h\u001b]0;~/Documents/oss/svg-term/fixtures — fish\u0007\u001b[30m\u001b(B\u001b[m\u001b[38;5;237m⏎\u001b(B\u001b[m\r\n\u001b[34m~/Documents/oss/svg-term/fixtures\u001b[30m\u001b(B\u001b[m \u001b[38;2;147;161;161mmaster*\u001b[30m\u001b(B\u001b[m\u001b[36m\u001b[30m\u001b(B\u001b[m \u001b[33m\u001b[30m\u001b(B\u001b[m\r\n\u001b[32m❯\u001b[30m\u001b(B\u001b[m \u001b[K\r\n\u001b[30m\u001b(B\u001b[m\u001b[30m\u001b(B\u001b[m\u001b[?2004l"
+    ],
+    [
+      1,
+      ""
+    ]
+  ]
+}

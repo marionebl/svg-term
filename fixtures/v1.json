@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "width": 80,
+  "height": 24,
+  "stdout": [
+    [1,"foo"],
+    [2,"bar"]
+  ]
+}
