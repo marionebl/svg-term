@@ -6,6 +6,7 @@ function color(input, theme) {
   if (!input) {
     return null;
   }
+
   if (Array.isArray(input)) {
     return `rgb(${input.join(', ')})`;
   }
