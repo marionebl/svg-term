@@ -93,3 +93,10 @@ test('render example', async t => {
   await example('commitlint.svg', result);
   t.pass();
 });
+
+test('render lolcat', async t => {
+  const input = await fixture('lolcat.json');
+  const result = render(input);
+  await example('lolcat.svg', result);
+  t.pass();
+});

@@ -1,3 +1,5 @@
+const rgb = require('ansi-to-rgb');
+
 module.exports = color;
 
 function color(input, theme) {
@@ -14,5 +16,11 @@ function color(input, theme) {
     return `rgb(${c.join(', ')})`;
   }
 
-  return `rgb(${[input, input, input].join(', ')})`;
+  const r = rgb[Number(input)];
+
+  if (r) {
+    return `rgb(${r.join(', ')})`;
+  }
+
+  throw new TypeError(`color: Unknown ANSI color ${input}`);
 }
