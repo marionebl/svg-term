@@ -12,15 +12,13 @@ function Word(props) {
         bg={props.bg}
         x={props.x ? `${props.x + 0.75}ch` : null}
         y={props.y - 1}
-        height={1.3}
         width={`${props.children.length + 2.75}ch`}
-        fontSize="1"
+        height={props.height}
         />
     ),
     <StyledText
       bold={props.bold}
       fg={props.fg}
-      fontSize="1"
       underline={props.underline}
       x={props.x ? `${props.x}ch` : null}
       y={props.y}
@@ -44,6 +42,7 @@ const StyledText = styled(styled(styled(styled(Text)`
 
 const StyledTextBackground = styled.rect`
   fill: ${props => color(props.bg, props.theme)};
+  height: ${props => props.height * props.theme.fontSize * props.theme.lineHeight};
 `;
 
 function fg(props, theme) {

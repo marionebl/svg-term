@@ -14,7 +14,7 @@ function Reel(props) {
 
   const animation = keyframes`
     ${props.stamps.map((stamp, i) => `
-      ${stamp}% {
+      ${p(stamp)}% {
         transform: translateX(-${t(i)}%);
       }
     `)}

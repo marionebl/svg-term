@@ -71,6 +71,45 @@ test('render expected number of frames', async t => {
   t.is(els.length, frames.length);
 });
 
+test('renders without window by default', async t => {
+  const input = await fixture('v2.json');
+  const [, frames] = JSON.parse(input);
+  const result = render(input);
+  const svg = doc(result);
+
+  const docs = Array.from(svg.getElementsByTagName('svg'));
+  const windows = docs.filter(d => d.getAttribute('data-name') === 'window');
+
+  // await copy(`data:image/svg+xml,${result}`);
+  t.is(windows.length, 0);
+});
+
+test('respects window option: true', async t => {
+  const input = await fixture('v2.json');
+  const [, frames] = JSON.parse(input);
+  const result = render(input, {window: true});
+  const svg = doc(result);
+
+  const docs = Array.from(svg.getElementsByTagName('svg'));
+  const windows = docs.filter(d => d.getAttribute('data-name') === 'window');
+
+  await copy(`data:image/svg+xml,${result}`);
+  t.is(windows.length, 1);
+});
+
+test('respects window option: false', async t => {
+  const input = await fixture('v2.json');
+  const [, frames] = JSON.parse(input);
+  const result = render(input, {window: false});
+  const svg = doc(result);
+
+  const docs = Array.from(svg.getElementsByTagName('svg'));
+  const windows = docs.filter(d => d.getAttribute('data-name') === 'window');
+
+  // await copy(`data:image/svg+xml,${result}`);
+  t.is(windows.length, 0);
+});
+
 test('render with styling', async t => {
   const input = await fixture('styles.json');
   const result = render(input);
@@ -89,7 +128,7 @@ test('render with correct spacing', async t => {
 
 test('render example', async t => {
   const input = await fixture('example.json');
-  const result = render(input);
+  const result = render(input, {window: true});
   await example('commitlint.svg', result);
   t.pass();
 });
@@ -105,5 +144,19 @@ test('render vim', async t => {
   const input = await fixture('vim.json');
   const result = render(input);
   await example('vim.svg', result);
+  t.pass();
+});
+
+test('render width', async t => {
+  const input = await fixture('width.json');
+  const result = render(input);
+  await example('width.svg', result);
+  t.pass();
+});
+
+test('render height', async t => {
+  const input = await fixture('height.json');
+  const result = render(input);
+  await example('height.svg', result);
   t.pass();
 });

@@ -18,6 +18,8 @@ function Document(props) {
       viewBox={[0, 0, props.width, props.height].join(' ')}
       width={props.width * 10}
       height={props.height * 10}
+      x={props.x}
+      y={props.y}
       >
     </svg>
   );

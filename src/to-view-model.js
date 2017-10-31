@@ -3,7 +3,7 @@ const hash = require('object-hash');
 
 module.exports = toViewModel;
 
-function toViewModel(cast) {
+function toViewModel(cast, theme) {
   const liner = getLiner(cast);
   const stamps = cast.frames.map(([delta], i) => delta);
 
@@ -15,7 +15,7 @@ function toViewModel(cast) {
           const words = toWords(chars);
 
           return {
-            y: y * 1.3,
+            y: y * theme.fontSize * theme.lineHeight,
             words,
             hash: hash(words),
             ref: null
@@ -60,7 +60,7 @@ function toViewModel(cast) {
     width: cast.width,
     displayWidth: cast.witdh,
     height: cast.height,
-    displayHeight: (cast.height + 1) * 1.3,
+    displayHeight: (cast.height + 1) * theme.fontSize * theme.lineHeight,
     duration: cast.duration,
     registry,
     stamps,

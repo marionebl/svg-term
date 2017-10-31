@@ -11,6 +11,7 @@ const Frame = require('./Frame');
 const Reel = require('./Reel');
 const Registry = require('./Registry');
 const Viewbox = require('./Viewbox');
+const Window = require('./Window');
 const Word = require('./Word');
 const toViewModel = require('./to-view-model');
 
@@ -25,21 +26,22 @@ function render(raw, options = {}) {
 
   const width = options.width;
   const height = options.height;
+  const theme = options.theme || DEFAULT_THEME;
 
   const json = toJSON(raw);
   const cast = load(json, width, height);
-  const data = toViewModel(cast);
+  const data = toViewModel(cast, theme);
 
-  const theme = options.theme || DEFAULT_THEME;
-
-  return renderToStaticMarkup(
+  const result = renderToStaticMarkup(
     <Document
       width={data.width}
       height={data.displayHeight}
       theme={theme}
+      x={options.window ? 15 : 0}
+      y={options.window ? 50 : 0}
       >
-      <g>
-        <Registry items={data.registry}/>
+      <g fontSize={theme.fontSize}>
+        <Registry items={data.registry} theme={theme}/>
         <Background
           width={data.width}
           height={data.displayHeight}
@@ -57,22 +59,26 @@ function render(raw, options = {}) {
                   stamp={frame.stamp}
                   offset={index}
                   width={data.width}
-                  height={data.height}
+                  height={data.displayHeight}
                   >
                   {
                     frame.cursor.visible &&
                       <Cursor
-                        fontSize="1"
                         x={`${frame.cursor.x}ch`}
-                        y={frame.cursor.y + 1}
-                        height="1.3"
+                        y={frame.cursor.y + theme.lineHeight}
+                        height={theme.fontSize * theme.lineHeight}
                         width="1ch"
                         />
                   }
                   {
                     frame.lines.map(line => {
                       if (typeof line.id === 'number') {
-                        return <use xlinkHref={`#${line.id}`} y={line.y}/>;
+                        return (
+                          <use
+                            xlinkHref={`#${line.id}`}
+                            y={line.y}
+                            />
+                        );
                       }
 
                       return line.words.map(word => {
@@ -83,7 +89,7 @@ function render(raw, options = {}) {
                             fg={word.attr.fg}
                             underline={word.attr.underline}
                             x={word.x}
-                            y={line.y + 1}
+                            y={line.y + theme.fontSize}
                             >
                             {word.children}
                           </Word>
@@ -99,6 +105,18 @@ function render(raw, options = {}) {
       </g>
     </Document>
   );
+
+  return options.window
+    ? renderToStaticMarkup(
+        <Window
+          width={data.width}
+          height={data.displayHeight}
+          theme={theme}
+          >
+          {result}
+        </Window>
+      )
+    : result;
 }
 
 function toJSON(raw) {

@@ -11,7 +11,7 @@ function Frame(props) {
         x="0"
         y="0"
         width={props.width}
-        height={(props.height + 1) * 1.3}
+        height={props.height}
         />
       {props.children}
     </svg>
@@ -20,7 +20,7 @@ function Frame(props) {
 
 const StyledFrame = styled(tag(['width', 'height'])('svg'))`
   width: ${props => props.width};
-  height: ${props => props.height};
+  height: ${props => (props.height + 1) * props.theme.fontSize * props.theme.lineHeight};
 `;
 
 const StyledBackground = styled.rect`

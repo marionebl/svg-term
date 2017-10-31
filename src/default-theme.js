@@ -18,5 +18,7 @@ module.exports = {
   background: [40, 45, 53], // background color
   bold: [185, 192, 203], // Default bold text color
   cursor: [111, 118, 131], // Cursor color
-  text: [185, 192, 203], // Default text color
+  text: [185, 192, 203], // Default text color,
+  fontSize: 1.67,
+  lineHeight: 1.3
 };

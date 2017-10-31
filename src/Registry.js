@@ -9,7 +9,7 @@ function Registry(props) {
       {props.items.map(item => {
         switch(item.type) {
           case 'line':
-            return <LineSymbol {...item}/>;
+            return <LineSymbol key={item.id} theme={props.theme} {...item}/>;
           default:
             throw new TypeEror(`Unknown Registry item of type ${item.type}`);
         }
@@ -28,7 +28,7 @@ function LineSymbol(props) {
           fg={word.attr.fg}
           underline={word.attr.underline}
           x={word.x}
-          y={1}
+          y={props.theme.fontSize}
           >
           {word.children}
         </Word>
