@@ -34,10 +34,12 @@ render(input: string, options?: Options): string
 interface Options {
   /**
    * ANSI theme to use
-   * Has to be contain all keys if specified
-   * Defaults to Atom one if omitted
+   * - has to contain all keys if specified
+   * - defaults to Atom One theme if omitted
    **/
   theme?: Theme;
+  /** Render with a framing window, defaults to false */
+  window?: boolean;
 }
 
 interface Theme {
