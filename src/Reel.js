@@ -1,3 +1,4 @@
+const {uniq} = require('lodash');
 const React = require('react');
 const styled = require('styled-components').default;
 const {keyframes} = require('styled-components');
@@ -13,7 +14,7 @@ function Reel(props) {
 
   const animation = keyframes`
     ${props.stamps.map((stamp, i) => `
-      ${p(stamp)}% {
+      ${stamp}% {
         transform: translateX(-${t(i)}%);
       }
     `)}
@@ -29,7 +30,6 @@ function Reel(props) {
         x="0"
         y="0"
         width={props.width}
-        data-name="reel"
         >
         {props.children}
       </svg>
@@ -42,4 +42,16 @@ const StyleAnimationStage = styled.g`
   animation-duration: ${props => props.duration}s;
   animation-iteration-count: infinite;
   animation-timing-function: steps(1, end);
-`
+`;
+
+const magnitude = x => {
+  const m = Math.floor(Math.log(x) / Math.log(10));
+  if (m < 0) {
+    return -m;
+  }
+  return 0;
+}
+
+const round = (x, n) => {
+  return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
+}

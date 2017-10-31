@@ -1,4 +1,5 @@
-const {isEqual} = require('lodash');
+const {flatMap, entries, groupBy, isEqual} = require('lodash');
+const hash = require('object-hash');
 
 module.exports = toViewModel;
 
@@ -11,9 +12,13 @@ function toViewModel(cast) {
     .map(([stamp, data, l], index) => {
       const lines = l
         .map((chars, y) => {
+          const words = toWords(chars);
+
           return {
-            y: (Math.round(y * 130) / 100),
-            words: toWords(chars)
+            y: y * 1.3,
+            words,
+            hash: hash(words),
+            ref: null
           };
         });
 
@@ -23,7 +28,32 @@ function toViewModel(cast) {
       cursor.x = cursor.x + 2;
       cursor.y = Math.max(0, cl.y - 1);
 
-      return {cursor, lines, stamp};
+      return {
+        cursor,
+        lines,
+        stamp: Math.round(stamp * 100) / 100
+      };
+    });
+
+  const candidates = flatMap(frames, 'lines').filter(line => line.words.length > 0);
+  const hashes = groupBy(candidates, 'hash');
+
+  const registry = entries(hashes)
+    .filter(([_, lines]) => lines.length > 1)
+    .map(([hash, [line]], index) => {
+      const id = index + 1;
+      const words = line.words.slice(0);
+
+      frames.forEach(frame => {
+        frame.lines
+          .filter(line => line.hash === hash)
+          .forEach(l => {
+            l.words = [];
+            l.id = id;
+          });
+      });
+
+      return {type: 'line', words, id};
     });
 
   return {
@@ -32,6 +62,7 @@ function toViewModel(cast) {
     height: cast.height,
     displayHeight: (cast.height + 1) * 1.3,
     duration: cast.duration,
+    registry,
     stamps,
     frames
   };

@@ -6,11 +6,7 @@ module.exports = Frame;
 
 function Frame(props) {
   return (
-    <svg
-      data-name="frame"
-      data-stamp={props.stamp}
-      x={props.offset * props.width}
-      >
+    <svg data-name="frame" x={props.offset * props.width}>
       <StyledBackground
         x="0"
         y="0"

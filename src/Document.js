@@ -7,7 +7,7 @@ module.exports = Document;
 function Document(props) {
   const sheet = new ServerStyleSheet()
   const content = render(props, {sheet});
-  const css = sheet.getStyleTags();
+  const css = sheet.getStyleTags().split(/\r?\n|\r/g).join('');
   const __html = `${css}${content}`;
 
   return (

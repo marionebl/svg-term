@@ -9,6 +9,7 @@ const Cursor = require('./Cursor');
 const Document = require('./Document');
 const Frame = require('./Frame');
 const Reel = require('./Reel');
+const Registry = require('./Registry');
 const Viewbox = require('./Viewbox');
 const Word = require('./Word');
 const toViewModel = require('./to-view-model');
@@ -59,6 +60,7 @@ function render(raw, options = {}) {
       theme={theme}
       >
       <g>
+        <Registry items={data.registry}/>
         <Background
           width={data.width}
           height={data.displayHeight}
@@ -90,6 +92,10 @@ function render(raw, options = {}) {
                   }
                   {
                     frame.lines.map(line => {
+                      if (typeof line.id === 'number') {
+                        return <use xlinkHref={`#${line.id}`} y={line.y}/>;
+                      }
+
                       return line.words.map(word => {
                         return (
                           <Word

@@ -5,7 +5,7 @@ module.exports = Viewbox;
 
 function Viewbox(props) {
   return (
-    <StyledViewbox data-name="viewbox">
+    <StyledViewbox>
       {props.children}
     </StyledViewbox>
   );
