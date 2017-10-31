@@ -74,7 +74,7 @@ function toWords(chars) {
     .filter((word, i, words) => {
       const trimmed = word.children.trim();
 
-      if (trimmed === '⏎') {
+      if (trimmed === '' || trimmed === '⏎') {
         return false;
       }
 
