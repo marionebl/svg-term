@@ -100,3 +100,10 @@ test('render lolcat', async t => {
   await example('lolcat.svg', result);
   t.pass();
 });
+
+test('render vim', async t => {
+  const input = await fixture('vim.json');
+  const result = render(input);
+  await example('vim.svg', result);
+  t.pass();
+});
