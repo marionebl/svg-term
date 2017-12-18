@@ -29,17 +29,16 @@ function Reel(props) {
         animationTimingFunction: 'steps(1, end)'
       }}
       >
-      <style>
-        {animation}
-      </style>
       <svg
         x="0"
         y="0"
         width={props.width}
         >
         {props.children}
+        <style>
+          {animation}
+        </style>
       </svg>
     </g>
   );
 }
-
