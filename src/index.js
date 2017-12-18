@@ -82,7 +82,6 @@ function render(raw, options = {}) {
                             />
                         );
                       }
-
                       return line.words.map(word => {
                         return (
                           <Word

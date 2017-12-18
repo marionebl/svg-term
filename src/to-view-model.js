@@ -84,19 +84,27 @@ function toWords(chars) {
         words.push({
           attr,
           x: 0,
-          children: ''
-        })
+          children: '',
+          offset: 0
+        });
       }
 
       const word = words[words.length - 1];
+      const children = String.fromCodePoint(point);
 
-      if (isEqual(word.attr, attr)) {
-        word.children += String.fromCodePoint(point);
+      if (children === ' ' && !('bg' in attr)) {
+        word.offset = word.offset + 1;
+        return words;
+      }
+
+      if (isEqual(word.attr, attr) && word.offset === 0) {
+        word.children += children;
       } else {
         words.push({
           attr,
-          x: word.x + word.children.length,
-          children: String.fromCodePoint(point)
+          x: word.x + word.children.length + word.offset,
+          children,
+          offset: 0
         });
       }
 
@@ -104,23 +112,12 @@ function toWords(chars) {
     }, [])
     .filter((word, i, words) => {
       const trimmed = word.children.trim();
+      const after = words.slice(i + 1);
 
-      if (trimmed === '' || trimmed === '⏎') {
+      if ((trimmed === '' || trimmed === '⏎')) {
         return false;
       }
 
       return true;
-    })
-    .map((word) => {
-      // Trim leading whitespace from words and
-      // and add to x offset of the same word
-      const trimmed = word.children.trimLeft();
-      const delta = word.children.length - trimmed.length;
-      if (delta === 0) {
-        return word;
-      }
-      word.children = trimmed;
-      word.x += delta;
-      return word;
-    })
+    });
 }
