@@ -1,13 +1,14 @@
 const React = require('react');
-const styled = require('styled-components').default;
 const color = require('./color');
 
 module.exports = Background;
 
 function Background(props) {
-  return <StyledBackground {...props}/>;
+  const fill = color(props.theme.background);
+  return <rect
+    style={{fill}}
+    width={props.width}
+    height={props.height}
+    data-name="Background"
+    />;
 }
-
-const StyledBackground = styled.rect`
-  fill: ${props => color(props.theme.background)};
-`

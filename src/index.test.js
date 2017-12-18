@@ -66,35 +66,27 @@ test('render expected number of frames', async t => {
   const svg = doc(result);
 
   const groups = Array.from(svg.getElementsByTagName('svg'));
-  const els = groups.filter(group => group.getAttribute('data-name') === 'frame');
+  const els = groups.filter(group => group.getAttribute('data-name') === 'Frame');
   // await copy(`data:image/svg+xml,${result}`);
   t.is(els.length, frames.length);
 });
 
-test.skip('renders without window by default', async t => {
+test('renders without window by default', async t => {
   const input = await fixture('v2.json');
   const [, frames] = JSON.parse(input);
   const result = render(input);
   const svg = doc(result);
 
-  const docs = Array.from(svg.getElementsByTagName('svg'));
-  const windows = docs.filter(d => d.getAttribute('data-name') === 'window');
-
-  // await copy(`data:image/svg+xml,${result}`);
-  // t.is(windows.length, 0);
+  t.is (svg.getAttribute('data-name'), 'Document');
 });
 
-test.skip('respects window option: true', async t => {
+test('respects window option: true', async t => {
   const input = await fixture('v2.json');
   const [, frames] = JSON.parse(input);
   const result = render(input, {window: true});
   const svg = doc(result);
 
-  const docs = Array.from(svg.getElementsByTagName('svg'));
-  const windows = docs.filter(d => d.getAttribute('data-name') === 'window');
-
-  await copy(`data:image/svg+xml,${result}`);
-  t.is(windows.length, 1);
+  t.is(svg.getAttribute('data-name'), 'Window');
 });
 
 test('respects window option: false', async t => {
@@ -104,13 +96,13 @@ test('respects window option: false', async t => {
   const svg = doc(result);
 
   const docs = Array.from(svg.getElementsByTagName('svg'));
-  const windows = docs.filter(d => d.getAttribute('data-name') === 'window');
+  const windows = docs.filter(d => d.getAttribute('data-name') === 'Window');
 
   // await copy(`data:image/svg+xml,${result}`);
   t.is(windows.length, 0);
 });
 
-test('render with styling', async t => {
+test.only('render with styling', async t => {
   const input = await fixture('styles.json');
   const result = render(input);
   // await copy(`data:image/svg+xml,${result}`);

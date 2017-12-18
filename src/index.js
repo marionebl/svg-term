@@ -1,7 +1,6 @@
 const React = require('react');
 const {renderToStaticMarkup} = require('react-dom/server');
 const {load} = require('load-asciicast');
-const {ThemeProvider} = require('styled-components');
 
 const color = require('./color');
 const Background = require('./Background');
@@ -32,7 +31,7 @@ function render(raw, options = {}) {
   const cast = load(json, width, height);
   const data = toViewModel(cast, theme);
 
-  const result = renderToStaticMarkup(
+  const result = (
     <Document
       width={data.width}
       height={data.displayHeight}
@@ -45,6 +44,7 @@ function render(raw, options = {}) {
         <Background
           width={data.width}
           height={data.displayHeight}
+          theme={theme}
           />
         <Reel
           duration={data.duration}
@@ -64,17 +64,19 @@ function render(raw, options = {}) {
                   {
                     frame.cursor.visible &&
                       <Cursor
+                        height={theme.fontSize * theme.lineHeight}
+                        theme={theme}
+                        width="1ch"
                         x={`${frame.cursor.x}ch`}
                         y={frame.cursor.y + theme.lineHeight}
-                        height={theme.fontSize * theme.lineHeight}
-                        width="1ch"
                         />
                   }
                   {
-                    frame.lines.map(line => {
+                    frame.lines.map((line, index) => {
                       if (typeof line.id === 'number') {
                         return (
                           <use
+                            key={`${line.id}-${index}`}
                             xlinkHref={`#${line.id}`}
                             y={line.y}
                             />
@@ -87,6 +89,7 @@ function render(raw, options = {}) {
                             bg={word.attr.bg}
                             bold={word.attr.bold}
                             fg={word.attr.fg}
+                            theme={theme}
                             underline={word.attr.underline}
                             x={word.x}
                             y={line.y + theme.fontSize}
@@ -116,7 +119,7 @@ function render(raw, options = {}) {
           {result}
         </Window>
       )
-    : result;
+    : renderToStaticMarkup(result);
 }
 
 function toJSON(raw) {

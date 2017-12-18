@@ -71,7 +71,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "screen-buffer": "^0.4.0",
-    "styled-components": "^2.2.2",
     "tag-hoc": "^1.0.0",
     "virtual-dom": "^2.1.1"
   }

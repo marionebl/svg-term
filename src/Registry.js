@@ -5,7 +5,7 @@ module.exports = Registry;
 
 function Registry(props) {
   return (
-    <defs>
+    <defs data-name="Registry">
       {props.items.map(item => {
         switch(item.type) {
           case 'line':
@@ -20,12 +20,14 @@ function Registry(props) {
 
 function LineSymbol(props) {
   return (
-    <symbol id={props.id}>
-      {props.words.map(word => (
+    <symbol data-name="LineSymbol" id={props.id}>
+      {props.words.map((word, index) => (
         <Word
           bg={word.attr.bg}
           bold={word.attr.bold}
           fg={word.attr.fg}
+          key={index}
+          theme={props.theme}
           underline={word.attr.underline}
           x={word.x}
           y={props.theme.fontSize}

@@ -1,7 +1,4 @@
-const {uniq} = require('lodash');
 const React = require('react');
-const styled = require('styled-components').default;
-const {keyframes} = require('styled-components');
 
 module.exports = Reel;
 
@@ -12,20 +9,29 @@ function Reel(props) {
   const p = s => s / dp;
   const t = i => i * sp;
 
-  const animation = keyframes`
-    ${props.stamps.map((stamp, i) => `
-      ${p(stamp)}% {
-        transform: translateX(-${t(i)}%);
-      }
-    `)}
+  const animation = `
+    @keyframes play {
+      ${props.stamps.map((stamp, i) => `
+        ${p(stamp)}% {
+          transform: translateX(-${t(i)}%);
+        }
+      `).join('\n')}
+    }
   `;
 
   return (
-    <StyleAnimationStage
-      animation={animation}
-      duration={props.duration}
-      count={props.stamps.length}
+    <g
+      data-name="Reel"
+      style={{
+        animationName: 'play',
+        animationDuration: `${props.duration}s`,
+        animationIterationCount: 'infinite',
+        animationTimingFunction: 'steps(1, end)'
+      }}
       >
+      <style>
+        {animation}
+      </style>
       <svg
         x="0"
         y="0"
@@ -33,18 +39,11 @@ function Reel(props) {
         >
         {props.children}
       </svg>
-    </StyleAnimationStage>
+    </g>
   );
 }
 
-const StyleAnimationStage = styled.g`
-  animation-name: ${props => props.animation};
-  animation-duration: ${props => props.duration}s;
-  animation-iteration-count: infinite;
-  animation-timing-function: steps(1, end);
-`;
-
-const magnitude = x => {
+/* const magnitude = x => {
   const m = Math.floor(Math.log(x) / Math.log(10));
   if (m < 0) {
     return -m;
@@ -54,4 +53,4 @@ const magnitude = x => {
 
 const round = (x, n) => {
   return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
-}
+} */

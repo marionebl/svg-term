@@ -1,5 +1,4 @@
 const React = require('react');
-const styled = require('styled-components').default;
 const tag = require('tag-hoc').default;
 const color = require('./color');
 
@@ -8,42 +7,29 @@ module.exports = Word;
 function Word(props) {
   return [
     typeof props.bg !== 'undefined' && (
-      <StyledTextBackground
-        bg={props.bg}
-        x={props.x ? `${props.x + 0.75}ch` : null}
-        y={props.y - 1}
+      <rect data-name="WordBackground"
+        height={props.theme.fontSize * props.theme.lineHeight}
+        style={{fill: color(props.bg, props.theme)}}
         width={`${props.children.length + 2.75}ch`}
-        height={props.height}
+        x={props.x ? `${props.x + 0.75}ch` : null}
+        y={props.y - props.theme.fontSize}
         />
     ),
-    <StyledText
-      bold={props.bold}
-      fg={props.fg}
-      underline={props.underline}
+    <text
+      data-name="WordBackground"
+      style={{
+        fontFamily: 'Monaco, Consolas, Menlo, \'Bitstream Vera Sans Mono\', monospace, \'Powerline Symbols\'',
+        fill: fg(props, props.theme),
+        textDecoration: props.underline ? 'underline' : 'none',
+        fontWeight: props.bold ? 'bold' : 'normal'
+      }}
       x={props.x ? `${props.x}ch` : null}
       y={props.y}
       >
       {props.children}
-    </StyledText>
+    </text>
   ];
 }
-
-const Text = tag(['fg', 'bg', 'underline', 'bold'])('text');
-
-const StyledText = styled(styled(styled(styled(Text)`
-  font-family: Monaco, Consolas, Menlo, 'Bitstream Vera Sans Mono', monospace, 'Powerline Symbols';
-`)`
-  fill: ${props => fg(props, props.theme)};
-`)`
-  text-decoration: ${props => props.underline ? 'underline' : 'none'};
-`)`
-  font-weight: ${props => props.bold ? 'bold': 'normal'};
-`;
-
-const StyledTextBackground = styled.rect`
-  fill: ${props => color(props.bg, props.theme)};
-  height: ${props => props.height * props.theme.fontSize * props.theme.lineHeight};
-`;
 
 function fg(props, theme) {
   const d = props.bold ? theme.bold : theme.text;

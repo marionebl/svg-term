@@ -1,16 +1,11 @@
 const React = require('react');
-const styled = require('styled-components').default;
 
 module.exports = Viewbox;
 
 function Viewbox(props) {
   return (
-    <StyledViewbox>
+    <g data-name="Viewbox">
       {props.children}
-    </StyledViewbox>
+    </g>
   );
 }
-
-const StyledViewbox = styled.g`
-
-`;
