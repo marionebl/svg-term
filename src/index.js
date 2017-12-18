@@ -68,7 +68,7 @@ function render(raw, options = {}) {
                         theme={theme}
                         width={theme.fontSize * 0.66}
                         x={frame.cursor.x - theme.fontSize * 1.2}
-                        y={frame.cursor.y + theme.lineHeight * 0.75}
+                        y={frame.cursor.y === 0 ? 0 : frame.cursor.y + theme.lineHeight * 0.75}
                         />
                   }
                   {

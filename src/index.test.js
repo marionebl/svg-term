@@ -125,6 +125,13 @@ test('render cursor', async t => {
   t.pass();
 });
 
+test('render qrcode', async t => {
+  const input = await fixture('qrcode.json');
+  const result = render(input);
+  await example('qrcode.svg', result);
+  t.pass();
+});
+
 test('render example', async t => {
   const input = await fixture('example.json');
   const result = render(input, {window: true});

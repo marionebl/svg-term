@@ -1,0 +1,322 @@
+{
+  "version": 1,
+  "width": 80,
+  "height": 20,
+  "duration": 5.816639,
+  "command": null,
+  "title": null,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/usr/local/bin/fish"
+  },
+  "stdout": [
+    [
+      0.061327,
+      "\u001b]0;fish  /Users/sickill\u0007\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.027969,
+      "\u001b]0;fish  /Users/sickill\u0007\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000159,
+      "\u001b[38;5;245m⏎\u001b[0m                                                                               \r \r"
+    ],
+    [
+      2.2e-05,
+      "\u001b[32m~\u001b[30m\u001b(B\u001b[m \u001b[30m\u001b(B\u001b[m\u001b[K"
+    ],
+    [
+      1.578915,
+      "p"
+    ],
+    [
+      0.000104,
+      "\b\u001b[38;5;26mp\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000271,
+      "\u001b[38;5;26mr\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000273,
+      "\u001b[38;5;26mi\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000163,
+      "\b\b\b\u001b[31m\u001b[1mpri\u001b(B\u001b[m"
+    ],
+    [
+      0.000262,
+      "\u001b[31m\u001b[1mn\u001b(B\u001b[m"
+    ],
+    [
+      0.000286,
+      "\u001b[31m\u001b[1mt\u001b(B\u001b[m"
+    ],
+    [
+      0.00031,
+      "\u001b[31m\u001b[1mf\u001b(B\u001b[m"
+    ],
+    [
+      0.000209,
+      "\b\b\b\b\b\b\u001b[38;5;26mprintf\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000294,
+      "\u001b[38;5;240m \"asciinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[44D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000319,
+      "\u001b[38;5;26m \u001b[38;5;240m\"asciinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[43D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000328,
+      "\b \u001b[38;5;240m\"asciinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[43D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000328,
+      "\"\u001b[38;5;240masciinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[42D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000332,
+      "\b\u001b[31m\u001b[1m\"\u001b(B\u001b[m\u001b[38;5;240masciinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[42D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000309,
+      "\u001b[31m\u001b[1ma\u001b(B\u001b[m\u001b[38;5;240msciinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[41D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000407,
+      "\u001b[31m\u001b[1ms\u001b(B\u001b[m\u001b[38;5;240mciinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[40D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000699,
+      "\u001b[31m\u001b[1mc\u001b(B\u001b[m\u001b[38;5;240miinema rocks!\" | curl -F-=\\<- qrenco.de\u001b[39D\u001b[30m\u001b(B\u001b[m\u001b[31m\u001b[1mi\u001b(B\u001b[m\u001b[38;5;240minema rocks!\" | curl -F-=\\<- qrenco.de\u001b[38D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000299,
+      "\u001b[31m\u001b[1mi\u001b(B\u001b[m\u001b[38;5;240mnema rocks!\" | curl -F-=\\<- qrenco.de\u001b[37D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000301,
+      "\u001b[31m\u001b[1mn\u001b(B\u001b[m\u001b[38;5;240mema rocks!\" | curl -F-=\\<- qrenco.de\u001b[36D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000304,
+      "\u001b[31m\u001b[1me\u001b(B\u001b[m\u001b[38;5;240mma rocks!\" | curl -F-=\\<- qrenco.de\u001b[35D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000333,
+      "\u001b[31m\u001b[1mm\u001b(B\u001b[m\u001b[38;5;240ma rocks!\" | curl -F-=\\<- qrenco.de\u001b[34D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000375,
+      "\u001b[31m\u001b[1ma\u001b(B\u001b[m\u001b[38;5;240m rocks!\" | curl -F-=\\<- qrenco.de\u001b[33D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000349,
+      "\u001b[31m\u001b[1m \u001b(B\u001b[m\u001b[38;5;240mrocks!\" | curl -F-=\\<- qrenco.de\u001b[32D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000248,
+      "\u001b[31m\u001b[1mr\u001b(B\u001b[m\u001b[38;5;240mocks!\" | curl -F-=\\<- qrenco.de\u001b[31D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000305,
+      "\u001b[31m\u001b[1mo\u001b(B\u001b[m\u001b[38;5;240mcks!\" | curl -F-=\\<- qrenco.de\u001b[30D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000314,
+      "\u001b[31m\u001b[1mc\u001b(B\u001b[m\u001b[38;5;240mks!\" | curl -F-=\\<- qrenco.de\u001b[29D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000316,
+      "\u001b[31m\u001b[1mk\u001b(B\u001b[m\u001b[38;5;240ms!\" | curl -F-=\\<- qrenco.de\u001b[28D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000251,
+      "\u001b[31m\u001b[1ms\u001b(B\u001b[m\u001b[38;5;240m!\" | curl -F-=\\<- qrenco.de\u001b[27D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000245,
+      "\u001b[31m\u001b[1m!\u001b(B\u001b[m\u001b[38;5;240m\" | curl -F-=\\<- qrenco.de\u001b[26D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000267,
+      "\u001b[31m\u001b[1m\"\u001b(B\u001b[m\u001b[38;5;240m | curl -F-=\\<- qrenco.de\u001b[25D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000263,
+      "\u001b[31m\u001b[1m \u001b(B\u001b[m\u001b[38;5;240m| curl -F-=\\<- qrenco.de\u001b[24D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000275,
+      "\u001b[31m\u001b[1m|\u001b(B\u001b[m\u001b[38;5;240m curl -F-=\\<- qrenco.de\u001b[23D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000256,
+      "\u001b[20D\u001b[33m\"asciinema rocks!\"\u001b[30m\u001b(B\u001b[m |\u001b[38;5;240m curl -F-=\\<- qrenco.de\u001b[23D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000191,
+      " \u001b[38;5;240mcurl -F-=\\<- qrenco.de\u001b[22D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.0002,
+      "\b \u001b[38;5;240mcurl -F-=\\<- qrenco.de\u001b[22D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000188,
+      "c\u001b[38;5;240murl -F-=\\<- qrenco.de\u001b[21D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000184,
+      "\b\u001b[31m\u001b[1mc\u001b(B\u001b[m\u001b[38;5;240murl -F-=\\<- qrenco.de\u001b[21D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.00018,
+      "\u001b[31m\u001b[1mu\u001b(B\u001b[m\u001b[38;5;240mrl -F-=\\<- qrenco.de\u001b[20D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000245,
+      "\b\b\u001b[38;5;26mcu\u001b[38;5;240mrl -F-=\\<- qrenco.de\u001b[20D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000188,
+      "\u001b[38;5;26mr\u001b[38;5;240ml -F-=\\<- qrenco.de\u001b[19D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000193,
+      "\b\b\b\u001b[31m\u001b[1mcur\u001b(B\u001b[m\u001b[38;5;240ml -F-=\\<- qrenco.de\u001b[19D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000167,
+      "\u001b[31m\u001b[1ml\u001b(B\u001b[m\u001b[38;5;240m -F-=\\<- qrenco.de\u001b[18D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000185,
+      "\b\b\b\b\u001b[38;5;26mcurl\u001b[38;5;240m -F-=\\<- qrenco.de\u001b[18D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000224,
+      "\u001b[38;5;26m \u001b[38;5;240m-F-=\\<- qrenco.de\u001b[17D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000209,
+      "\b \u001b[38;5;240m-F-=\\<- qrenco.de\u001b[17D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000148,
+      "-\u001b[38;5;240mF-=\\<- qrenco.de\u001b[16D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000256,
+      "F\u001b[38;5;240m-=\\<- qrenco.de\u001b[15D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000271,
+      "-\u001b[38;5;240m=\\<- qrenco.de\u001b[14D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000192,
+      "\b\b\b\u001b[38;5;39m-F-\u001b[38;5;240m=\\<- qrenco.de\u001b[14D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000161,
+      "\u001b[38;5;39m=\u001b[38;5;240m\\<- qrenco.de\u001b[13D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000237,
+      "\u001b[38;5;39m\\\u001b[38;5;240m<- qrenco.de\u001b[12D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000172,
+      "\b\b\b\b\b\u001b[31m\u001b[1m-F-=\\\u001b(B\u001b[m\u001b[38;5;240m<- qrenco.de\u001b[12D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000151,
+      "\u001b[31m\u001b[1m<\u001b(B\u001b[m\u001b[38;5;240m- qrenco.de\u001b[11D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000214,
+      "\u001b[31m\u001b[1m-\u001b(B\u001b[m\u001b[38;5;240m qrenco.de\u001b[10D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000231,
+      "\u001b[31m\u001b[1m \u001b(B\u001b[m\u001b[38;5;240mqrenco.de\u001b[9D\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000207,
+      "\u001b[31m\u001b[1mq\u001b(B\u001b[m\u001b[38;5;240mrenco.de\b\b\b\b\b\b\b\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000199,
+      "\u001b[31m\u001b[1mr\u001b(B\u001b[m\u001b[38;5;240menco.de\b\b\b\b\b\b\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000318,
+      "\u001b[31m\u001b[1me\u001b(B\u001b[m\u001b[38;5;240mnco.de\b\b\b\b\b\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.00026,
+      "\u001b[31m\u001b[1mn\u001b(B\u001b[m\u001b[38;5;240mco.de\b\b\b\b\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000197,
+      "\u001b[31m\u001b[1mc\u001b(B\u001b[m\u001b[38;5;240mo.de\b\b\b\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.00019,
+      "\u001b[31m\u001b[1mo\u001b(B\u001b[m\u001b[38;5;240m.de\b\b\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000215,
+      "\u001b[31m\u001b[1m.\u001b(B\u001b[m\u001b[38;5;240mde\b\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000241,
+      "\u001b[31m\u001b[1md\u001b(B\u001b[m\u001b[38;5;240me\b\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000114,
+      "\u001b[31m\u001b[1me\u001b(B\u001b[m"
+    ],
+    [
+      0.000316,
+      "\u001b[17D\u001b[38;5;39m-F-=\u001b[36m\\<\u001b[38;5;39m-\u001b[30m\u001b(B\u001b[m \u001b[38;5;39mqrenco.de\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      2.0,
+      "\r\n\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.000236,
+      "\u001b]0;printf  /Users/sickill\u0007\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      0.113547,
+      "█████████████████████████████\r\n█████████████████████████████\r\n████ ▄▄▄▄▄ █▀▄██▀█ ▄▄▄▄▄ ████\r\n████ █   █ █▀ █▄▀█ █   █ ████\r\n████ █▄▄▄█ █▀   ▀█ █▄▄▄█ ████\r\n████▄▄▄▄▄▄▄█▄▀▄▀▄█▄▄▄▄▄▄▄████\r\n████▄   ▄▀▄▄▄▄███ ▀ ▀▄▀ ▀████\r\n████▀█▀ █ ▄▀▄   ▄ ███ ▀ █████\r\n████▄▄███▄▄█▀▄██▄█▄▀▀█▀█▀████\r\n████ ▄▄▄▄▄ █▄▄▀ ▄▄█▀▀ ▀ █████\r\n████ █   █ █  ▄▄██▄▀ ██▀█████\r\n████ █▄▄▄█ █ █▄▄▄▀███  ██████\r\n████▄▄▄▄▄▄▄█▄█▄█▄▄▄▄▄"
+    ],
+    [
+      0.000199,
+      "██▄█████\r\n█████████████████████████████\r\n█████████████████████████████\r\n"
+    ],
+    [
+      0.016725,
+      "\u001b]0;fish  /Users/sickill\u0007\u001b[30m\u001b(B\u001b[m"
+    ],
+    [
+      9.3e-05,
+      "\u001b[38;5;245m⏎\u001b[0m                                                                               \r \r"
+    ],
+    [
+      1.9e-05,
+      "\u001b[32m~\u001b[30m\u001b(B\u001b[m \u001b[30m\u001b(B\u001b[m\u001b[K"
+    ],
+    [
+      2.0,
+      "\r\n\u001b[30m\u001b(B\u001b[m\r\n\u001b[30m\u001b(B\u001b[m"
+    ]
+  ]
+}
