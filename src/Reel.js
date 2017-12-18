@@ -43,14 +43,3 @@ function Reel(props) {
   );
 }
 
-/* const magnitude = x => {
-  const m = Math.floor(Math.log(x) / Math.log(10));
-  if (m < 0) {
-    return -m;
-  }
-  return 0;
-}
-
-const round = (x, n) => {
-  return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
-} */

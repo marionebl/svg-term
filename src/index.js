@@ -66,9 +66,9 @@ function render(raw, options = {}) {
                       <Cursor
                         height={theme.fontSize * theme.lineHeight}
                         theme={theme}
-                        width="1ch"
-                        x={`${frame.cursor.x}ch`}
-                        y={frame.cursor.y + theme.lineHeight}
+                        width={theme.fontSize * 0.66}
+                        x={frame.cursor.x - theme.fontSize * 1.2}
+                        y={frame.cursor.y + theme.lineHeight * 0.75}
                         />
                   }
                   {

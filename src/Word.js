@@ -6,11 +6,11 @@ module.exports = Word;
 
 function Word(props) {
   return [
-    typeof props.bg !== 'undefined' && (
+    (typeof props.bg !== 'undefined' && props.bg !== props.theme.background) && (
       <rect data-name="WordBackground"
         height={props.theme.fontSize * props.theme.lineHeight}
         style={{fill: color(props.bg, props.theme)}}
-        width={`${props.children.length + 2.75}ch`}
+        width={`${props.children.length}ch`}
         x={props.x ? `${props.x + 0.75}ch` : null}
         y={props.y - props.theme.fontSize}
         />

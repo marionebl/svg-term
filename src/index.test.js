@@ -102,7 +102,7 @@ test('respects window option: false', async t => {
   t.is(windows.length, 0);
 });
 
-test.only('render with styling', async t => {
+test('render with styling', async t => {
   const input = await fixture('styles.json');
   const result = render(input);
   // await copy(`data:image/svg+xml,${result}`);
@@ -115,6 +115,13 @@ test('render with correct spacing', async t => {
   const result = render(input);
   // await copy(`data:image/svg+xml,${result}`);
   await example('spacing.svg', result);
+  t.pass();
+});
+
+test('render cursor', async t => {
+  const input = await fixture('cursor.json');
+  const result = render(input);
+  await example('cursor.svg', result);
   t.pass();
 });
 
