@@ -6,6 +6,8 @@ module.exports = toViewModel;
 function toViewModel(cast, theme) {
   const liner = getLiner(cast);
   const stamps = cast.frames.map(([delta], i) => delta);
+  const fontSize = theme.fontSize;
+  const lineHeight = theme.lineHeight;
 
   const frames = cast.frames
     .map(([delta, data], i) => [delta, data, liner(data)])
@@ -15,7 +17,7 @@ function toViewModel(cast, theme) {
           const words = toWords(chars);
 
           return {
-            y: y * theme.fontSize * theme.lineHeight,
+            y: y * fontSize * lineHeight,
             words,
             hash: hash(words),
             ref: null
@@ -60,7 +62,7 @@ function toViewModel(cast, theme) {
     width: cast.width,
     displayWidth: cast.witdh,
     height: cast.height,
-    displayHeight: (cast.height + 1) * theme.fontSize * theme.lineHeight,
+    displayHeight: (cast.height + 1) * fontSize * lineHeight,
     duration: cast.duration,
     registry,
     stamps,

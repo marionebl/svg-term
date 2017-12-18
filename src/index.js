@@ -25,7 +25,10 @@ function render(raw, options = {}) {
 
   const width = options.width;
   const height = options.height;
+
   const theme = options.theme || DEFAULT_THEME;
+  theme.fontSize = 'fontSize' in theme ? theme.fontSize : DEFAULT_THEME.fontSize;
+  theme.lineHeight = 'lineHeight' in theme ? theme.lineHeight : DEFAULT_THEME.lineHeight;
 
   const json = toJSON(raw);
   const cast = load(json, width, height);
