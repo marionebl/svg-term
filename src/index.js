@@ -51,6 +51,7 @@ function render(raw, options = {}) {
           />
         <Reel
           duration={data.duration}
+          frameWidth={cast.width}
           stamps={data.stamps}
           width={data.frames.length * cast.width}
           >

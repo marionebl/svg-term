@@ -10,8 +10,8 @@ function Word(props) {
       <rect data-name="WordBackground"
         height={props.theme.fontSize * props.theme.lineHeight}
         style={{fill: color(props.bg, props.theme)}}
-        width={`${props.children.length}ch`}
-        x={props.x ? `${props.x + 0.75}ch` : null}
+        width={props.children.length > 0 ? props.children.length : 0}
+        x={props.x ? props.children.length + 1 : null}
         y={props.y - props.theme.fontSize}
         />
     ),
@@ -23,7 +23,7 @@ function Word(props) {
         textDecoration: props.underline ? 'underline' : 'none',
         fontWeight: props.bold ? 'bold' : 'normal'
       }}
-      x={props.x ? `${props.x}ch` : null}
+      x={props.x * props.theme.fontSize * 0.6}
       y={props.y}
       >
       {props.children}

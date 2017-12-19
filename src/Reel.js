@@ -7,13 +7,12 @@ function Reel(props) {
   const sp = 100 / props.stamps.length;
 
   const p = s => s / dp;
-  const t = i => i * sp;
 
   const animation = `
     @keyframes play {
       ${props.stamps.map((stamp, i) => `
         ${p(stamp)}% {
-          transform: translateX(-${t(i)}%);
+          transform: translateX(-${props.frameWidth * i}px);
         }
       `).join('\n')}
     }
@@ -35,7 +34,7 @@ function Reel(props) {
         width={props.width}
         >
         {props.children}
-        <style>
+        <style type="text/css">
           {animation}
         </style>
       </svg>
