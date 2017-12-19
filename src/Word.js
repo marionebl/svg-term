@@ -6,20 +6,19 @@ module.exports = Word;
 
 function Word(props) {
   return [
-    (typeof props.bg !== 'undefined' && props.bg !== props.theme.background) && (
+    (props.inverse || props.bg) &&
       <rect data-name="WordBackground"
         height={props.theme.fontSize * props.theme.lineHeight}
-        style={{fill: color(props.bg, props.theme)}}
+        style={{fill: props.inverse ? fg(props, props.theme) : bg(props, props.theme)}}
         width={props.children.length > 0 ? props.children.length : 0}
-        x={props.x ? props.children.length + 1 : null}
+        x={props.x * props.theme.fontSize * 0.6}
         y={props.y - props.theme.fontSize}
-        />
-    ),
+      />,
     <text
-      data-name="WordBackground"
+      data-name="Word"
       style={{
         fontFamily: 'Monaco, Consolas, Menlo, \'Bitstream Vera Sans Mono\', monospace, \'Powerline Symbols\'',
-        fill: fg(props, props.theme),
+        fill: props.inverse ? bg(props, props.theme) : fg(props, props.theme),
         textDecoration: props.underline ? 'underline' : 'none',
         fontWeight: props.bold ? 'bold' : 'normal'
       }}
@@ -31,7 +30,13 @@ function Word(props) {
   ];
 }
 
+function bg(props, theme) {
+  const b = typeof props.bg === 'undefined' ? theme.background : props.bg;
+  return color(b, theme, theme.background);
+}
+
 function fg(props, theme) {
   const d = props.bold ? theme.bold : theme.text;
-  return color(props.fg || d, theme);
+  const f = typeof props.fg === 'undefined' ? d : props.fg;
+  return color(f, theme, d);
 }

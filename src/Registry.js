@@ -26,6 +26,7 @@ function LineSymbol(props) {
           bg={word.attr.bg}
           bold={word.attr.bold}
           fg={word.attr.fg}
+          inverse={word.attr.inverse}
           key={index}
           theme={props.theme}
           underline={word.attr.underline}

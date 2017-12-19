@@ -92,6 +92,7 @@ function render(raw, options = {}) {
                             bg={word.attr.bg}
                             bold={word.attr.bold}
                             fg={word.attr.fg}
+                            inverse={word.attr.inverse}
                             theme={theme}
                             underline={word.attr.underline}
                             x={word.x}

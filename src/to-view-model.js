@@ -119,7 +119,6 @@ function toWords(chars) {
       if ((trimmed === '' || trimmed === '⏎')) {
         return false;
       }
-
       return true;
     });
 }
