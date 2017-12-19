@@ -2,7 +2,7 @@ const rgb = require('ansi-to-rgb');
 
 module.exports = color;
 
-function color(input, theme) {
+function color(input, theme, fallback) {
   if (!input) {
     return null;
   }
@@ -23,5 +23,9 @@ function color(input, theme) {
     return `rgb(${r.join(', ')})`;
   }
 
-  throw new TypeError(`color: Unknown ANSI color ${input}`);
+  if (!fallback) {
+    throw new TypeError(`color: Unknown ANSI color ${input}`);
+  }
+
+  return color(fallback);
 }
