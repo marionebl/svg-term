@@ -10,7 +10,9 @@ function toViewModel(cast, theme) {
   const lineHeight = theme.lineHeight;
 
   const frames = cast.frames
-    .map(([delta, data], i) => [delta, data, liner(data)])
+    .map(([delta, data], i) => {
+      return [delta, data, liner(data)];
+    })
     .map(([stamp, data, l], index) => {
       const lines = l
         .map((chars, y) => {
@@ -73,7 +75,7 @@ function toViewModel(cast, theme) {
 function getLiner(cast) {
   switch (cast.version) {
     case 0:
-      return (data) => Array.from(data.lines);
+      return (data) => toOne(data.lines);
     default:
       return (data) => data.screen.lines;
   }
@@ -119,6 +121,18 @@ function toWords(chars) {
       if ((trimmed === '' || trimmed === '⏎')) {
         return false;
       }
+
       return true;
     });
+}
+
+function toOne(arrayLike) {
+  return Object.entries(arrayLike)
+    .sort((a, b) => a[0] - b[0])
+    .map(e => e[1])
+    .map(words => words.reduce((chars, word) => {
+      const [content, attr] = word;
+      chars.push(...content.split('').map(char => [char.codePointAt(0), attr]));
+      return chars;
+    }, []), []);
 }
