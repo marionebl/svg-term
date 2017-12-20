@@ -96,7 +96,7 @@ function toWords(chars) {
       const word = words[words.length - 1];
       const children = String.fromCodePoint(point);
 
-      if (children === ' ' && !('bg' in attr)) {
+      if (children === ' ' && !('bg' in attr) && !attr.inverse) {
         word.offset = word.offset + 1;
         return words;
       }
@@ -115,6 +115,10 @@ function toWords(chars) {
       return words;
     }, [])
     .filter((word, i, words) => {
+      if ('bg' in word.attr || word.attr.inverse) {
+        return true;
+      }
+
       const trimmed = word.children.trim();
       const after = words.slice(i + 1);
 
