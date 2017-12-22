@@ -4,10 +4,22 @@ const styled = require('./styled');
 
 module.exports = Reel;
 
+const PERCEPTIBLE = 1 / 60;
+
+function magnitude(x) {
+  const y = Math.abs(x);
+
+  if (y > 1) {
+    return 0;
+  }
+
+  const result = Math.floor(Math.log(y) / Math.log(10) + 1);
+  return result === 0 ? result : -1 * result;
+}
+
 function Reel(props) {
-  const dp = props.duration / 100;
-  const sp = 100 / props.stamps.length;
-  const p = s => s / dp;
+  const factor = Math.pow(10, magnitude(PERCEPTIBLE / (props.duration / 100)) + 1);
+  const p = s => Math.round((s / (props.duration / 100)) * factor) / factor;
 
   const animation = keyframes`
     ${props.stamps.map((stamp, i) => `
