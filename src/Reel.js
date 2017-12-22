@@ -18,6 +18,18 @@ function magnitude(x) {
 }
 
 function Reel(props) {
+  if (props.duration === 0) {
+    return (
+      <svg
+      x="0"
+      y="0"
+      width={props.width}
+      >
+        {props.children}
+      </svg>
+    );
+  }
+
   const factor = Math.pow(10, magnitude(PERCEPTIBLE / (props.duration / 100)) + 1);
   const p = s => Math.round((s / (props.duration / 100)) * factor) / factor;
 

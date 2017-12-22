@@ -3,16 +3,17 @@ const hash = require('object-hash');
 
 module.exports = toViewModel;
 
-function toViewModel(cast, theme) {
+function toViewModel(cast, {theme, from, to}) {
   const liner = getLiner(cast);
-  const stamps = cast.frames.map(([delta], i) => delta);
+  const stamps = cast.frames
+    .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
+    .map(([delta], i) => delta);
   const fontSize = theme.fontSize;
   const lineHeight = theme.lineHeight;
 
   const frames = cast.frames
-    .map(([delta, data], i) => {
-      return [delta, data, liner(data)];
-    })
+    .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
+    .map(([delta, data], i) => [delta, data, liner(data)])
     .map(([stamp, data, l], index) => {
       const lines = l
         .map((chars, y) => {
@@ -65,7 +66,7 @@ function toViewModel(cast, theme) {
     displayWidth: cast.witdh,
     height: cast.height,
     displayHeight: (cast.height + 1) * fontSize * lineHeight,
-    duration: cast.duration,
+    duration: to - from,
     registry,
     stamps,
     frames

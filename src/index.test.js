@@ -96,6 +96,20 @@ test('render example', async t => {
   t.pass();
 });
 
+test('render example', async t => {
+  const input = await fixture('example.json');
+  const result = render(input, {window: true, from: 1000, to: 5000});
+  await example('commitlint-1-to-5.svg', result);
+  t.pass();
+});
+
+test('render example', async t => {
+  const input = await fixture('example.json');
+  const result = render(input, {window: true, at: 5000});
+  await example('commitlint-at-5.svg', result);
+  t.pass();
+});
+
 test('render lolcat', async t => {
   const input = await fixture('lolcat.json');
   const result = render(input);

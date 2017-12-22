@@ -40,6 +40,12 @@ interface Options {
   theme?: Theme;
   /** Render with a framing window, defaults to false */
   window?: boolean;
+  /** Lower bound of timeline to render in milliseconds */
+  from?: number;
+  /** Upper bound of timeline to render in milliseconds */
+  to?: number;
+  /** Timestamp of single frame to render in milliseconds **/
+  at?: number;
 }
 
 interface Theme {

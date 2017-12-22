@@ -37,7 +37,12 @@ function render(raw, options = {}) {
 
   const json = toJSON(raw);
   const cast = load(json, width, height);
-  const data = toViewModel(cast, theme);
+
+  const data = toViewModel(cast, {
+    theme,
+    from: from(options, {cast}),
+    to: to(options, {cast})
+  });
 
   const result = (
     <Document
@@ -142,4 +147,29 @@ function toJSON(raw) {
     return raw;
   }
   return JSON.stringify(raw);
+}
+
+const NOOP = () => true;
+const MAX = max => ([f]) => f <= max;
+const MIN = min => ([f]) => f >= min;
+
+function nearest(stamp, {cast, max, min}) {
+  return cast.frames
+    .filter(typeof max === 'number' ? MAX(max) : NOOP)
+    .filter(typeof min === 'number' ? MIN(min) : NOOP)
+    .sort(([a], [b]) => Math.abs((stamp - a)) - Math.abs((stamp - b)))[0][0];
+}
+
+function from(options, {cast}) {
+  if (typeof options.at === 'number') {
+    return nearest(options.at / 1000, {cast});
+  }
+  return 'from' in options ? nearest(options.from / 1000, {cast, min: options.from / 1000}) : 0;
+}
+
+function to(options, {cast}) {
+  if (typeof options.at === 'number') {
+    return nearest(options.at / 1000, {cast});
+  }
+  return 'to' in options ? nearest(options.to / 1000, {cast, max: options.to / 1000}) : cast.duration;
 }
