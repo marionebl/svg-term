@@ -11,6 +11,7 @@
     "target": "es2015"
   },
   "exclude": [
+    "lib/**/*.js",
     "src/test/**/*.js",
     "src/test/**/*.ts",
     "src/**/*.test.js",
