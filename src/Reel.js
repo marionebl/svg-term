@@ -1,4 +1,5 @@
 const React = require('react');
+const keyframes = require('@stiligita/keyframes').default;
 const styled = require('./styled');
 
 module.exports = Reel;
@@ -6,22 +7,19 @@ module.exports = Reel;
 function Reel(props) {
   const dp = props.duration / 100;
   const sp = 100 / props.stamps.length;
-
   const p = s => s / dp;
 
-  const animation = `
-    @keyframes play {
-      ${props.stamps.map((stamp, i) => `
-        ${p(stamp)}% {
-          transform: translateX(-${props.frameWidth * i}px);
-        }
-      `).join('\n')}
-    }
+  const animation = keyframes`
+    ${props.stamps.map((stamp, i) => `
+      ${p(stamp)}% {
+        transform: translateX(-${props.frameWidth * i}px);
+      }
+    `).join('\n')}
   `;
 
   return (
     <StyledAnimationStage
-      animation="play"
+      animation={animation}
       duration={props.duration}
       >
       <svg
@@ -30,9 +28,6 @@ function Reel(props) {
         width={props.width}
         >
         {props.children}
-        <style type="text/css">
-          {animation}
-        </style>
       </svg>
     </StyledAnimationStage>
   );
