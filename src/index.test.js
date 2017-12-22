@@ -59,50 +59,7 @@ test('return valid svg string', async t => {
   t.notThrows(() => parser.parseFromString(result, 'image/svg+xml', {}));
 });
 
-test('render expected number of frames', async t => {
-  const input = await fixture('v2.json');
-  const [, frames] = JSON.parse(input);
-  const result = render(input);
-  const svg = doc(result);
-
-  const groups = Array.from(svg.getElementsByTagName('svg'));
-  const els = groups.filter(group => group.getAttribute('data-name') === 'Frame');
-  // await copy(`data:image/svg+xml,${result}`);
-  t.is(els.length, frames.length);
-});
-
-test('renders without window by default', async t => {
-  const input = await fixture('v2.json');
-  const [, frames] = JSON.parse(input);
-  const result = render(input);
-  const svg = doc(result);
-
-  t.is (svg.getAttribute('data-name'), 'Document');
-});
-
-test('respects window option: true', async t => {
-  const input = await fixture('v2.json');
-  const [, frames] = JSON.parse(input);
-  const result = render(input, {window: true});
-  const svg = doc(result);
-
-  t.is(svg.getAttribute('data-name'), 'Window');
-});
-
-test('respects window option: false', async t => {
-  const input = await fixture('v2.json');
-  const [, frames] = JSON.parse(input);
-  const result = render(input, {window: false});
-  const svg = doc(result);
-
-  const docs = Array.from(svg.getElementsByTagName('svg'));
-  const windows = docs.filter(d => d.getAttribute('data-name') === 'Window');
-
-  // await copy(`data:image/svg+xml,${result}`);
-  t.is(windows.length, 0);
-});
-
-test.only('render with styling', async t => {
+test('render with styling', async t => {
   const input = await fixture('styles.json');
   const result = render(input);
   // await copy(`data:image/svg+xml,${result}`);
@@ -132,7 +89,7 @@ test('render qrcode', async t => {
   t.pass();
 });
 
-test('render example', async t => {
+test.only('render example', async t => {
   const input = await fixture('example.json');
   const result = render(input, {window: true});
   await example('commitlint.svg', result);

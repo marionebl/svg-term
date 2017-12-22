@@ -1,6 +1,6 @@
+const {load} = require('load-asciicast');
 const React = require('react');
 const {renderToStaticMarkup} = require('react-dom/server');
-const {load} = require('load-asciicast');
 
 const color = require('./color');
 const Background = require('./Background');
@@ -12,11 +12,16 @@ const Registry = require('./Registry');
 const Viewbox = require('./Viewbox');
 const Window = require('./Window');
 const Word = require('./Word');
+const styled = require('./styled');
 const toViewModel = require('./to-view-model');
 
 const DEFAULT_THEME = require('./default-theme');
 
 module.exports.render = render;
+
+const StyledContainer = styled.g`
+  font-family: Monaco, Consolas, Menlo, 'Bitstream Vera Sans Mono', 'Powerline Symbols', monospace;
+`;
 
 function render(raw, options = {}) {
   if (!raw) {
@@ -42,7 +47,7 @@ function render(raw, options = {}) {
       x={options.window ? 15 : 0}
       y={options.window ? 50 : 0}
       >
-      <g fontSize={theme.fontSize}>
+      <StyledContainer fontSize={theme.fontSize}>
         <Registry
           frameHeight={cast.height}
           frameWidth={cast.width}
@@ -115,7 +120,7 @@ function render(raw, options = {}) {
             })
           }
         </Reel>
-      </g>
+      </StyledContainer>
     </Document>
   );
 

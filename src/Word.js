@@ -10,7 +10,6 @@ function Word(props) {
     (props.inverse || props.bg) &&
       <StyledWordBackground
         bg={props.bg}
-        data-name="WordBackground"
         fg={props.fg}
         height={props.theme.fontSize * props.theme.lineHeight}
         inverse={props.inverse}
@@ -21,7 +20,6 @@ function Word(props) {
     <StyledWord
       bg={props.bg}
       bold={props.bold}
-      data-name="Word"
       fg={props.fg}
       inverse={props.inverse}
       theme={props.theme}
@@ -44,7 +42,6 @@ const StyledWordBackground = styled.rect`
 `;
 
 const StyledWord = styled.text`
-  font-family: Monaco, Consolas, Menlo, 'Bitstream Vera Sans Mono', 'Powerline Symbols', monospace;
   fill: ${TEXT_FILL};
   text-decoration: ${DECORATION};
   font-weight: ${FONT_WEIGHT}

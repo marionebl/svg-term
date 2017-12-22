@@ -4,7 +4,7 @@ module.exports = Viewbox;
 
 function Viewbox(props) {
   return (
-    <g data-name="Viewbox">
+    <g>
       {props.children}
     </g>
   );

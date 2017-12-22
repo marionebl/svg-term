@@ -6,7 +6,6 @@ module.exports = Background;
 
 function Background(props) {
   return <StyledBackground
-    data-name="Background"
     height={props.height}
     theme={props.theme}
     width={props.width}

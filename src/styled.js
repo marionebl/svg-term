@@ -1,3 +1,4 @@
+const React = require('react');
 const styled = require('@stiligita/core').default
 const react = require('@stiligita/react').default
 const {CREATE_COMPONENT, CREATE_SELECTOR, PROCESSOR, GET_NAME} = require('@stiligita/constants')
@@ -39,7 +40,11 @@ const defaultId = (key, keys) => key
 
 const createComponent = (strings, args, tag, defaultProps) => {
   const amendedDefaultProps = Object.assign({theme: DEFAULT_THEME}, defaultProps);
-  return react(strings, args, tag, amendedDefaultProps);
+  const Component = react(strings, args, tag, amendedDefaultProps);
+  return (props) => {
+    const name = process.env.DEBUG === 'true' ? Component.displayName : null;
+    return <Component {...props} data-name={name}/>;
+  };
 }
 
 const createClassName = (hash, mode) => {
