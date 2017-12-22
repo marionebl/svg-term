@@ -1,34 +1,54 @@
 const React = require('react');
 const tag = require('tag-hoc').default;
 const color = require('./color');
+const styled = require('./styled');
 
 module.exports = Word;
 
 function Word(props) {
   return [
     (props.inverse || props.bg) &&
-      <rect data-name="WordBackground"
+      <StyledWordBackground
+        bg={props.bg}
+        data-name="WordBackground"
+        fg={props.fg}
         height={props.theme.fontSize * props.theme.lineHeight}
-        style={{fill: props.inverse ? fg(props, props.theme) : bg(props, props.theme)}}
+        inverse={props.inverse}
         width={props.children.length > 0 ? props.children.length : 0}
         x={props.x * props.theme.fontSize * 0.6}
         y={props.y - props.theme.fontSize}
       />,
-    <text
+    <StyledWord
+      bg={props.bg}
+      bold={props.bold}
       data-name="Word"
-      style={{
-        fontFamily: 'Monaco, Consolas, Menlo, \'Bitstream Vera Sans Mono\', monospace, \'Powerline Symbols\'',
-        fill: props.inverse ? bg(props, props.theme) : fg(props, props.theme),
-        textDecoration: props.underline ? 'underline' : 'none',
-        fontWeight: props.bold ? 'bold' : 'normal'
-      }}
+      fg={props.fg}
+      inverse={props.inverse}
+      theme={props.theme}
+      underline={props.underline}
       x={props.x * props.theme.fontSize * 0.6}
       y={props.y}
       >
       {props.children}
-    </text>
+    </StyledWord>
   ];
 }
+
+const BG_FILL = props => props.inverse ? fg(props, props.theme) : bg(props, props.theme);
+const TEXT_FILL = props => props.inverse ? bg(props, props.theme) : fg(props, props.theme);
+const DECORATION = props => props.underline ? 'underline' : 'none';
+const FONT_WEIGHT = props => props.bold ? 'bold' : 'normal';
+
+const StyledWordBackground = styled.rect`
+  fill: ${BG_FILL};
+`;
+
+const StyledWord = styled.text`
+  font-family: Monaco, Consolas, Menlo, 'Bitstream Vera Sans Mono', 'Powerline Symbols', monospace;
+  fill: ${TEXT_FILL};
+  text-decoration: ${DECORATION};
+  font-weight: ${FONT_WEIGHT}
+`;
 
 function bg(props, theme) {
   const b = typeof props.bg === 'undefined' ? theme.background : props.bg;

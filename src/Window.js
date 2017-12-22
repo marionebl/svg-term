@@ -1,5 +1,6 @@
 const React = require('react');
 const color = require('./color');
+const styled = require('./styled');
 
 module.exports = Window;
 
@@ -15,18 +16,26 @@ function Window(props) {
       width={width}
       height={height}
       >
-      <rect
+      <StyledBackground
         data-name="WindowBackground"
         width={width}
         height={height}
         rx={5}
         ry={5}
-        fill={color(props.theme.background)}
+        theme={props.theme}
         />
-      <circle data-name="WindowButton" cx="20" cy="20" r="7.5" fill="#ff5f58"/>
-      <circle data-name="WindowButton" cx="45" cy="20" r="7.5" fill="#ffbd2e"/>
-      <circle data-name="WindowButton" cx="70" cy="20" r="7.5" fill="#18c132"/>
+      <StyledDot data-name="WindowButton" cx="20" cy="20" r="7.5" color="#ff5f58"/>
+      <StyledDot data-name="WindowButton" cx="45" cy="20" r="7.5" color="#ffbd2e"/>
+      <StyledDot data-name="WindowButton" cx="70" cy="20" r="7.5" color="#18c132"/>
       {props.children}
     </svg>
   );
 }
+
+const StyledBackground = styled.rect`
+  fill: ${props => color(props.theme.background)};
+`;
+
+const StyledDot = styled.circle`
+  fill: ${props => props.color};
+`;

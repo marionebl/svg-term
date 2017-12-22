@@ -1,5 +1,7 @@
 const React = require('react');
+const Cursor = require('./Cursor');
 const Word = require('./Word');
+const styled = require('./styled');
 
 module.exports = Registry;
 
@@ -14,6 +16,25 @@ function Registry(props) {
             throw new TypeEror(`Unknown Registry item of type ${item.type}`);
         }
       })}
+      {props.hasFrames && [
+        <symbol id="a" key="a">
+          <StyledBackground
+            data-name="FrameBackground"
+            height={props.frameHeight}
+            width={props.frameWidth}
+            x="0"
+            y="0"
+            />
+        </symbol>,
+        <symbol id="b" key="b">
+          <Cursor
+            height={props.height}
+            width={props.width}
+            theme={props.theme}
+            />
+        </symbol>
+        ]
+      }
     </defs>
   );
 }
@@ -39,3 +60,7 @@ function LineSymbol(props) {
     </symbol>
   );
 }
+
+const StyledBackground = styled.rect`
+  fill: transparent;
+`;
