@@ -1,6 +1,6 @@
 const styled = require('@stiligita/core').default
 const react = require('@stiligita/react').default
-const {CREATE_COMPONENT, PROCESSOR, GET_NAME} = require('@stiligita/constants')
+const {CREATE_COMPONENT, CREATE_SELECTOR, PROCESSOR, GET_NAME} = require('@stiligita/constants')
 const Abcq = require('abcq')
 const DEFAULT_THEME = require('./default-theme');
 
@@ -27,10 +27,11 @@ const safelyAlphanumeric = (a, b) => {
 }
 
 const sortCSSProps = rules => {
-  rules = rules.split(';').filter(x => Boolean(x.trim()))
-  .sort(safelyAlphanumeric)
-  .join(';')
   return rules
+    .split(';')
+    .filter(x => Boolean(x.trim()))
+    .sort(safelyAlphanumeric)
+    .join(';')
 }
 
 const shortId = (key, keys) => shortid.encode(keys.indexOf(key))
@@ -41,14 +42,25 @@ const createComponent = (strings, args, tag, defaultProps) => {
   return react(strings, args, tag, amendedDefaultProps);
 }
 
+const createClassName = (hash, mode) => {
+  switch (mode) {
+    case 'css':
+      return `.${hash}`;
+    case 'html':
+      return {className: hash};
+  }
+};
+
 shortId.stiligita = GET_NAME
 defaultId.stiligita = GET_NAME
 sortCSSProps.stiligita = PROCESSOR
 createComponent.stiligita = CREATE_COMPONENT;
+createClassName.stiligita = CREATE_SELECTOR;
 
 styled
   .before(sortCSSProps)
   .use(createComponent)
   .use(shortId)
+  .use(createClassName)
 
 module.exports = styled;
