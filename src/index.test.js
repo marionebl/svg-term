@@ -132,7 +132,7 @@ test('render qrcode', async t => {
   t.pass();
 });
 
-test('render example', async t => {
+test.only('render example', async t => {
   const input = await fixture('example.json');
   const result = render(input, {window: true});
   await example('commitlint.svg', result);

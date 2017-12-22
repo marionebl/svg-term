@@ -7,15 +7,9 @@ function Frame(props) {
   return (
     <svg
       data-name="Frame"
-      x={props.offset * props.width}>
-      <rect
-        data-name="FrameBackground"
-        height={props.height}
-        style={{fill: 'transparent'}}
-        width={props.width}
-        x="0"
-        y="0"
-        />
+      x={props.offset * props.width}
+      >
+      <use xlinkHref="#a"/>
       {props.children}
     </svg>
   );

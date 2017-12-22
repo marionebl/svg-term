@@ -43,7 +43,13 @@ function render(raw, options = {}) {
       y={options.window ? 50 : 0}
       >
       <g fontSize={theme.fontSize}>
-        <Registry items={data.registry} theme={theme}/>
+        <Registry
+          frameHeight={cast.height}
+          frameWidth={cast.width}
+          hasFrames={data.frames.length > 0}
+          items={data.registry}
+          theme={theme}
+          />
         <Background
           width={data.width}
           height={data.displayHeight}

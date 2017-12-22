@@ -65,6 +65,12 @@
     "xmldom": "^0.1.27"
   },
   "dependencies": {
+    "@stiligita/constants": "0.0.1-1",
+    "@stiligita/core": "0.0.1-2",
+    "@stiligita/keyframes": "0.0.1-5",
+    "@stiligita/react": "0.0.1-5",
+    "@stiligita/stylesheets": "0.0.1-5",
+    "abcq": "^0.2.2",
     "ansi-to-rgb": "^1.0.0",
     "load-asciicast": "^1.0.1",
     "lodash": "^4.17.4",
