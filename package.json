@@ -65,11 +65,11 @@
     "xmldom": "^0.1.27"
   },
   "dependencies": {
-    "@stiligita/constants": "0.0.1-1",
-    "@stiligita/core": "0.0.1-2",
-    "@stiligita/keyframes": "0.0.1-5",
-    "@stiligita/react": "0.0.1-5",
-    "@stiligita/stylesheets": "0.0.1-5",
+    "@stiligita/constants": "^1.0.0-0",
+    "@stiligita/core": "^1.0.0-0",
+    "@stiligita/keyframes": "^1.0.0-0",
+    "@stiligita/react": "^1.0.0-0",
+    "@stiligita/stylesheets": "^1.0.0-0",
     "abcq": "^0.2.2",
     "ansi-to-rgb": "^1.0.0",
     "load-asciicast": "^1.0.1",

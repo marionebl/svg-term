@@ -102,7 +102,7 @@ test('respects window option: false', async t => {
   t.is(windows.length, 0);
 });
 
-test('render with styling', async t => {
+test.only('render with styling', async t => {
   const input = await fixture('styles.json');
   const result = render(input);
   // await copy(`data:image/svg+xml,${result}`);
@@ -132,7 +132,7 @@ test('render qrcode', async t => {
   t.pass();
 });
 
-test.only('render example', async t => {
+test('render example', async t => {
   const input = await fixture('example.json');
   const result = render(input, {window: true});
   await example('commitlint.svg', result);
