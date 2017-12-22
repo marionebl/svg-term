@@ -1,6 +1,7 @@
+import * as React from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+
 const {load} = require('load-asciicast');
-const React = require('react');
-const {renderToStaticMarkup} = require('react-dom/server');
 
 const color = require('./color');
 const Background = require('./Background');
@@ -17,15 +18,50 @@ const toViewModel = require('./to-view-model');
 
 const DEFAULT_THEME = require('./default-theme');
 
-module.exports.render = render;
-
 const StyledContainer = styled.g`
   font-family: Monaco, Consolas, Menlo, 'Bitstream Vera Sans Mono', 'Powerline Symbols', monospace;
 `;
 
-function render(raw, options = {}) {
+export interface SvgTermOptions {
+  at?: number;
+  from?: number;
+  height?: number;
+  theme?: SvgTermTheme;
+  to?: number;
+  width?: number;
+  window?: boolean;
+}
+
+export type SvgTermColor = [number, number, number];
+
+export interface SvgTermTheme {
+  0: SvgTermColor;
+  1: SvgTermColor;
+  2: SvgTermColor;
+  3: SvgTermColor;
+  4: SvgTermColor;
+  5: SvgTermColor;
+  6: SvgTermColor;
+  7: SvgTermColor;
+  8: SvgTermColor;
+  9: SvgTermColor;
+  10: SvgTermColor;
+  11: SvgTermColor;
+  12: SvgTermColor;
+  13: SvgTermColor;
+  14: SvgTermColor;
+  15: SvgTermColor;
+  background: SvgTermColor;
+  bold: SvgTermColor;
+  cursor: SvgTermColor;
+  text: SvgTermColor;
+  fontSize: number;
+  lineHeight: number;
+}
+
+export function render(raw: string, options: SvgTermOptions = {}): string {
   if (!raw) {
-    throw new TypeEror(`svg-term.reder: missing data`);
+    throw new TypeError(`svg-term.reder: missing data`);
   }
 
   const width = options.width;
@@ -37,11 +73,13 @@ function render(raw, options = {}) {
 
   const json = toJSON(raw);
   const cast = load(json, width, height);
+  const bound = {from: options.from, to: options.to, at: options.at, cast};
 
-  const data = toViewModel(cast, {
+  const data = toViewModel({
+    cast,
     theme,
-    from: from(options, {cast}),
-    to: to(options, {cast})
+    from: from(bound),
+    to: to(bound)
   });
 
   const result = (
@@ -72,7 +110,7 @@ function render(raw, options = {}) {
           width={data.frames.length * cast.width}
           >
           {data.frames
-            .map((frame, index) => {
+            .map((frame: any, index: number) => {
               return (
                 <Frame
                   key={frame.stamp}
@@ -92,7 +130,7 @@ function render(raw, options = {}) {
                         />
                   }
                   {
-                    frame.lines.map((line, index) => {
+                    frame.lines.map((line: any, index: number) => {
                       if (typeof line.id === 'number') {
                         return (
                           <use
@@ -102,7 +140,7 @@ function render(raw, options = {}) {
                             />
                         );
                       }
-                      return line.words.map(word => {
+                      return line.words.map((word: any) => {
                         return (
                           <Word
                             bg={word.attr.bg}
@@ -142,7 +180,7 @@ function render(raw, options = {}) {
     : renderToStaticMarkup(result);
 }
 
-function toJSON(raw) {
+function toJSON(raw: any): string {
   if (typeof raw === 'string') {
     return raw;
   }
@@ -150,26 +188,45 @@ function toJSON(raw) {
 }
 
 const NOOP = () => true;
-const MAX = max => ([f]) => f <= max;
-const MIN = min => ([f]) => f >= min;
+const MAX = (max: number) => ([f]: any) => f <= max;
+const MIN = (min: number) => ([f]: any) => f >= min;
 
-function nearest(stamp, {cast, max, min}) {
+interface NearestOptions {
+  cast: any;
+  max?: number;
+  min?: number;
+}
+
+interface ClampOptions {
+  cast: any;
+  at?: number;
+  from?: number;
+  to?: number;
+}
+
+function nearest(stamp: number, {cast, max, min}: NearestOptions) {
   return cast.frames
-    .filter(typeof max === 'number' ? MAX(max) : NOOP)
-    .filter(typeof min === 'number' ? MIN(min) : NOOP)
-    .sort(([a], [b]) => Math.abs((stamp - a)) - Math.abs((stamp - b)))[0][0];
+    .filter(typeof max === 'number' && !isNaN(max) ? MAX(max) : NOOP)
+    .filter(typeof min === 'number' && !isNaN(min) ? MIN(min) : NOOP)
+    .sort(([a]: any, [b]: any) => Math.abs((stamp - a)) - Math.abs((stamp - b)))[0][0];
 }
 
-function from(options, {cast}) {
-  if (typeof options.at === 'number') {
-    return nearest(options.at / 1000, {cast});
+function from(options: ClampOptions) {
+  const {at, from, to, cast} = options;
+  if (typeof at === 'number') {
+    return nearest(at / 1000, {cast});
   }
-  return 'from' in options ? nearest(options.from / 1000, {cast, min: options.from / 1000}) : 0;
+  return typeof from === 'number' && !isNaN(from)
+    ? nearest(from / 1000, {cast, min: from / 1000})
+    : 0;
 }
 
-function to(options, {cast}) {
-  if (typeof options.at === 'number') {
-    return nearest(options.at / 1000, {cast});
+function to(options: ClampOptions) {
+  const {at, from, to, cast} = options;
+  if (typeof at === 'number') {
+    return nearest(at / 1000, {cast});
   }
-  return 'to' in options ? nearest(options.to / 1000, {cast, max: options.to / 1000}) : cast.duration;
+  return typeof to === 'number' && !isNaN(from)
+    ? nearest(to / 1000, {cast, max: to / 1000})
+    : cast.duration;
 }

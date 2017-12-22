@@ -7,10 +7,10 @@
     "lib"
   ],
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "tsc",
     "clean": "npx rimraf lib",
     "deps": "npm run build && dependency-check . --missing && dependency-check . --extra --no-dev",
-    "test": "ava"
+    "test": "jest"
   },
   "license": "MIT",
   "repository": {
@@ -28,40 +28,31 @@
     "url": "https://github.com/marionebl/svg-term/issues"
   },
   "homepage": "https://github.com/marionebl/svg-term#readme",
-  "ava": {
-    "files": [
-      "src/*.test.js",
-      "fixtures/*.json"
-    ],
-    "require": [
-      "babel-register"
-    ]
-  },
-  "babel": {
-    "ignore": "*.test.js",
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": 8
-          }
-        }
-      ],
-      "react"
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.jsx?$": "ts-jest"
+    },
+    "testRegex": "(.*).test.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
     ]
   },
   "devDependencies": {
     "@marionebl/sander": "^0.6.1",
-    "ava": "^0.22.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-register": "^6.26.0",
+    "@types/jest": "^21.1.9",
     "copy-paste": "^1.3.0",
     "dependency-check": "^2.9.2",
+    "jest": "^22.0.4",
+    "jest-cli": "^22.0.4",
     "pkg-dir": "^2.0.0",
+    "ts-jest": "^22.0.0",
+    "typescript": "^2.6.2",
     "xmldom": "^0.1.27"
   },
   "dependencies": {
@@ -70,6 +61,8 @@
     "@stiligita/keyframes": "^1.0.0-0",
     "@stiligita/react": "^1.0.0-0",
     "@stiligita/stylesheets": "^1.0.0-0",
+    "@types/react": "^16.0.31",
+    "@types/react-dom": "^16.0.3",
     "abcq": "^0.2.2",
     "ansi-to-rgb": "^1.0.0",
     "load-asciicast": "^1.0.1",

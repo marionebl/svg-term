@@ -3,7 +3,7 @@ const hash = require('object-hash');
 
 module.exports = toViewModel;
 
-function toViewModel(cast, {theme, from, to}) {
+function toViewModel({cast, theme, from, to}) {
   const liner = getLiner(cast);
   const stamps = cast.frames
     .filter(([stamp], i, fs) => stamp >= from && stamp <= to)

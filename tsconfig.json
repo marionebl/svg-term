@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "jsx": "react",
+    "lib": ["es2015"],
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "lib/",
+    "pretty": true,
+    "sourceMap": true,
+    "target": "es2015"
+  },
+  "exclude": [
+    "src/test/**/*.js",
+    "src/test/**/*.ts",
+    "src/**/*.test.js",
+    "src/**/*.test.ts"
+  ]
+}
