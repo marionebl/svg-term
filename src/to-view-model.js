@@ -7,7 +7,7 @@ function toViewModel({cast, theme, from, to}) {
   const liner = getLiner(cast);
   const stamps = cast.frames
     .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
-    .map(([delta], i) => delta);
+    .map(([stamp], i) => stamp - from);
   const fontSize = theme.fontSize;
   const lineHeight = theme.lineHeight;
 
@@ -36,7 +36,7 @@ function toViewModel({cast, theme, from, to}) {
       return {
         cursor,
         lines,
-        stamp: Math.round(stamp * 100) / 100
+        stamp: (Math.round(stamp * 100) / 100) - from
       };
     });
 
