@@ -13,7 +13,6 @@ function Document(props) {
   return (
     <svg
       dangerouslySetInnerHTML={{__html}}
-      data-name="Document"
       height={props.height * 10}
       viewBox={[0, 0, props.width, props.height].join(' ')}
       width={props.width * 10}

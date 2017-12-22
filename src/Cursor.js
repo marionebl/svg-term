@@ -6,7 +6,6 @@ module.exports = Cursor;
 
 function Cursor(props) {
   return <StyledCursor
-    data-name="Cursor"
     height={props.height}
     theme={props.theme}
     width={props.width}

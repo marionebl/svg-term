@@ -1,4 +1,5 @@
 const React = require('react');
+const tag = require('tag-hoc').default;
 const color = require('./color');
 const styled = require('./styled');
 
@@ -10,23 +11,21 @@ function Window(props) {
 
   return (
     <svg
-      data-name="Window"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width={width}
       height={height}
       >
       <StyledBackground
-        data-name="WindowBackground"
         width={width}
         height={height}
         rx={5}
         ry={5}
         theme={props.theme}
         />
-      <StyledDot data-name="WindowButton" cx="20" cy="20" r="7.5" color="#ff5f58"/>
-      <StyledDot data-name="WindowButton" cx="45" cy="20" r="7.5" color="#ffbd2e"/>
-      <StyledDot data-name="WindowButton" cx="70" cy="20" r="7.5" color="#18c132"/>
+      <StyledDot cx="20" cy="20" r="7.5" bgColor="#ff5f58"/>
+      <StyledDot cx="45" cy="20" r="7.5" bgColor="#ffbd2e"/>
+      <StyledDot cx="70" cy="20" r="7.5" bgColor="#18c132"/>
       {props.children}
     </svg>
   );
@@ -37,5 +36,5 @@ const StyledBackground = styled.rect`
 `;
 
 const StyledDot = styled.circle`
-  fill: ${props => props.color};
+  fill: ${props => props.bgColor};
 `;
