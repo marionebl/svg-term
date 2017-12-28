@@ -66,7 +66,7 @@ function toViewModel({cursor: cursorOption, cast, theme, from, to}) {
     width: cast.width,
     displayWidth: cast.witdh,
     height: cast.height,
-    displayHeight: (cast.height + 1) * fontSize * lineHeight,
+    displayHeight: cast.height * lineHeight,
     duration: to - from,
     registry,
     stamps,
