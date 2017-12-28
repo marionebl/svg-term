@@ -3,7 +3,7 @@ const hash = require('object-hash');
 
 module.exports = toViewModel;
 
-function toViewModel({cast, theme, from, to}) {
+function toViewModel({cursor: cursorOption, cast, theme, from, to}) {
   const liner = getLiner(cast);
   const stamps = cast.frames
     .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
@@ -32,6 +32,7 @@ function toViewModel({cast, theme, from, to}) {
 
       cursor.x = cursor.x + 2;
       cursor.y = Math.max(0, cl.y - 1);
+      cursor.visible = cursorOption === false ? false : cursor.visible;
 
       return {
         cursor,

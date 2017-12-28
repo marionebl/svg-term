@@ -54,6 +54,7 @@ export interface SvgTermTheme {
   15: SvgTermColor;
   background: SvgTermColor;
   bold: SvgTermColor;
+  cursor: SvgTermColor;
   text: SvgTermColor;
   fontSize: number;
   lineHeight: number;
@@ -77,6 +78,7 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
 
   const data = toViewModel({
     cast,
+    cursor: options.cursor,
     theme,
     from: from(bound),
     to: to(bound)
