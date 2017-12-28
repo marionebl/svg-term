@@ -27,9 +27,9 @@ function Registry(props) {
         </symbol>,
         <symbol id="b" key="b">
           <Cursor
-            height={props.height}
-            width={props.width}
+            height={props.theme.fontSize * props.theme.lineHeight}
             theme={props.theme}
+            width={props.theme.fontSize * 0.66}
             />
         </symbol>
         ]

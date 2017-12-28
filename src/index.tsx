@@ -30,6 +30,7 @@ export interface SvgTermOptions {
   to?: number;
   width?: number;
   window?: boolean;
+  cursor?: boolean;
 }
 
 export type SvgTermColor = [number, number, number];
@@ -53,7 +54,6 @@ export interface SvgTermTheme {
   15: SvgTermColor;
   background: SvgTermColor;
   bold: SvgTermColor;
-  cursor: SvgTermColor;
   text: SvgTermColor;
   fontSize: number;
   lineHeight: number;
@@ -121,10 +121,8 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
                   >
                   {
                     frame.cursor.visible &&
-                      <Cursor
-                        height={theme.fontSize * theme.lineHeight}
-                        theme={theme}
-                        width={theme.fontSize * 0.66}
+                      <use
+                        xlinkHref="#b"
                         x={frame.cursor.x - theme.fontSize * 1.2}
                         y={frame.cursor.y === 0 ? 0 : frame.cursor.y + theme.lineHeight * 0.75}
                         />
