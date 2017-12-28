@@ -25,13 +25,15 @@ function Registry(props) {
             y="0"
             />
         </symbol>,
-        <symbol id="b" key="b">
-          <Cursor
-            height={props.theme.fontSize * props.theme.lineHeight}
-            theme={props.theme}
-            width={props.theme.fontSize * 0.66}
-            />
-        </symbol>
+        props.hasCursors && (
+            <symbol id="b" key="b">
+              <Cursor
+                height={props.theme.fontSize * props.theme.lineHeight}
+                theme={props.theme}
+                width={props.theme.fontSize * 0.66}
+                />
+            </symbol>
+          )
         ]
       }
     </defs>

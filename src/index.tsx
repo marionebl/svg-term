@@ -96,6 +96,7 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
         <Registry
           frameHeight={cast.height}
           frameWidth={cast.width}
+          hasCursors={data.frames.some((frame: any) => frame.cursor.visible)}
           hasFrames={data.frames.length > 0}
           items={data.registry}
           theme={theme}
