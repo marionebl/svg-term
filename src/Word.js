@@ -34,8 +34,8 @@ function Word(props) {
 
 const BG_FILL = props => props.inverse ? fg(props, props.theme) : bg(props, props.theme);
 const TEXT_FILL = props => props.inverse ? bg(props, props.theme) : fg(props, props.theme);
-const DECORATION = props => props.underline ? 'underline' : 'none';
-const FONT_WEIGHT = props => props.bold ? 'bold' : 'normal';
+const DECORATION = props => props.underline ? 'underline' : null;
+const FONT_WEIGHT = props => props.bold ? 'bold' : null;
 
 const StyledWordBackground = styled.rect`
   fill: ${BG_FILL};

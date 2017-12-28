@@ -31,6 +31,7 @@ const sortCSSProps = rules => {
   return rules
     .split(';')
     .filter(x => Boolean(x.trim()))
+    .filter(x => x.split(':').every(f => f.trim() !== ''))
     .sort(safelyAlphanumeric)
     .join(';')
 }
