@@ -6,8 +6,11 @@ const styled = require("./styled");
 module.exports = Window;
 
 function Window(props) {
-  const width = props.width * 10 + 30;
-  const height = props.height * 10 + 50 + 15;
+  const paddingTop = props.paddingY;
+  const paddingBottom = props.decorations ? 12.5 : props.paddingY;
+
+  const width = props.width * 10 + props.paddingX*2;
+  const height = props.height * 10 + paddingTop + paddingBottom;
 
   return (
     <svg
@@ -16,15 +19,15 @@ function Window(props) {
       width={width}
       height={height}
       >
+      <StyledBackground
+        key="bg"
+        width={width}
+        height={height}
+        rx={props.decorations ? 5 : 0}
+        ry={props.decorations ? 5 : 0}
+        theme={props.theme}
+        />
       {props.decorations && [
-        <StyledBackground
-          key="bg"
-          width={width}
-          height={height}
-          rx={5}
-          ry={5}
-          theme={props.theme}
-        />,
         <StyledDot key="red" cx="20" cy="20" r="7.5" bgColor="#ff5f58" />,
         <StyledDot key="yellow" cx="45" cy="20" r="7.5" bgColor="#ffbd2e" />,
         <StyledDot key="green" cx="70" cy="20" r="7.5" bgColor="#18c132" />

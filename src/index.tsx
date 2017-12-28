@@ -26,6 +26,8 @@ export interface SvgTermOptions {
   at?: number;
   from?: number;
   height?: number;
+  paddingX?: number;
+  paddingY?: number;
   theme?: SvgTermTheme;
   to?: number;
   width?: number;
@@ -67,6 +69,11 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
 
   const width = options.width;
   const height = options.height;
+  const rawPaddingX = typeof options.paddingX === 'number' ? options.paddingX : 0;
+  const rawPaddingY = typeof options.paddingY === 'number' ? options.paddingY : 0;
+
+  const paddingX = options.window ? 12.5 : rawPaddingX;
+  const paddingY = options.window ? 40 : rawPaddingY;
 
   const theme = options.theme || DEFAULT_THEME;
   theme.fontSize = 'fontSize' in theme ? theme.fontSize : DEFAULT_THEME.fontSize;
@@ -90,13 +97,15 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
       width={data.width}
       height={data.displayHeight}
       theme={theme}
+      paddingX={paddingX}
+      paddingY={paddingY}
     >
       <Document
         width={data.width}
         height={data.displayHeight}
         theme={theme}
-        x={options.window ? 12.5 : 0}
-        y={options.window ? 40 : 0}
+        x={options.window ? 12.5 : options.paddingX}
+        y={options.window ? 40 : options.paddingY}
         >
         <StyledContainer fontSize={theme.fontSize}>
           <Registry
