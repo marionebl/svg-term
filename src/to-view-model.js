@@ -3,13 +3,15 @@ const hash = require('object-hash');
 
 module.exports = toViewModel;
 
-function toViewModel({cursor: cursorOption, cast, theme, from, to}) {
+function toViewModel(options) {
+  const {cursor: cursorOption, cast, theme, from, to} = options;
   const liner = getLiner(cast);
   const stamps = cast.frames
     .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
     .map(([stamp], i) => stamp - from);
   const fontSize = theme.fontSize;
   const lineHeight = theme.lineHeight;
+  const height = typeof options.height === 'number' ? options.height : cast.height;
 
   const frames = cast.frames
     .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
@@ -62,11 +64,13 @@ function toViewModel({cursor: cursorOption, cast, theme, from, to}) {
       return {type: 'line', words, id};
     });
 
+  console.log(height);
+
   return {
     width: cast.width,
     displayWidth: cast.witdh,
     height: cast.height,
-    displayHeight: cast.height * lineHeight,
+    displayHeight: height * fontSize * lineHeight,
     duration: to - from,
     registry,
     stamps,

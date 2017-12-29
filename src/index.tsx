@@ -67,8 +67,6 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
     throw new TypeError(`svg-term.reder: missing data`);
   }
 
-  const width = options.width;
-  const height = options.height;
   const rawPaddingX = typeof options.paddingX === 'number' ? options.paddingX : 0;
   const rawPaddingY = typeof options.paddingY === 'number' ? options.paddingY : 0;
 
@@ -80,12 +78,13 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
   theme.lineHeight = 'lineHeight' in theme ? theme.lineHeight : DEFAULT_THEME.lineHeight;
 
   const json = toJSON(raw);
-  const cast = load(json, width, typeof height === 'number' ? height + 1 : undefined);
+  const cast = load(json, options.width, typeof options.height === 'number' ? options.height + 1 : undefined);
   const bound = {from: options.from, to: options.to, at: options.at, cast};
 
   const data = toViewModel({
     cast,
     cursor: options.cursor,
+    height: options.height,
     theme,
     from: from(bound),
     to: to(bound)
