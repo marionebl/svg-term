@@ -12,6 +12,10 @@ function Window(props) {
   const width = props.width * 10 + props.paddingX*2;
   const height = props.height * 10 + paddingTop + paddingBottom;
 
+  const d = Math.round(width / 50);
+  const gap = Math.round(width / 80);
+  const r = d / 2;
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -28,9 +32,9 @@ function Window(props) {
         theme={props.theme}
         />
       {props.decorations && [
-        <StyledDot key="red" cx="20" cy="20" r="7.5" bgColor="#ff5f58" />,
-        <StyledDot key="yellow" cx="45" cy="20" r="7.5" bgColor="#ffbd2e" />,
-        <StyledDot key="green" cx="70" cy="20" r="7.5" bgColor="#18c132" />
+        <StyledDot key="red" cx="20" cy="20" r={r} bgColor="#ff5f58" />,
+        <StyledDot key="yellow" cx={20 + gap + d} cy="20" r={r} bgColor="#ffbd2e" />,
+        <StyledDot key="green" cx={20 + gap*2 + d*2} cy="20" r={r} bgColor="#18c132" />
       ]}
       {props.children}
     </svg>
