@@ -80,7 +80,7 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
   theme.lineHeight = 'lineHeight' in theme ? theme.lineHeight : DEFAULT_THEME.lineHeight;
 
   const json = toJSON(raw);
-  const cast = load(json, width, height + 1);
+  const cast = load(json, width, typeof height === 'number' ? height + 1 : undefined);
   const bound = {from: options.from, to: options.to, at: options.at, cast};
 
   const data = toViewModel({
