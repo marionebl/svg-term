@@ -64,8 +64,6 @@ function toViewModel(options) {
       return {type: 'line', words, id};
     });
 
-  console.log(height);
-
   return {
     width: cast.width,
     displayWidth: cast.witdh,
