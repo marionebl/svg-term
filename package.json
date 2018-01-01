@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "npx rimraf lib",
+    "debug": "node --inspect-brk \"$(npm bin)/jest\" -i",
     "deps": "npm run build && dependency-check . --missing && dependency-check . --extra --no-dev",
     "test": "jest"
   },

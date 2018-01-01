@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "address": "localhost",
+            "cwd": "${workspaceRoot}",
+            "name": "debug",
+            "port": 9229,
+            "request": "launch",
+            "runtimeArgs": [
+              "debug",
+              "--debug=9229"
+            ],
+            "runtimeExecutable": "yarn",
+            "stopOnEntry": false,
+            "type": "node"
+        }
+    ]
+}
