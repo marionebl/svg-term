@@ -54,6 +54,12 @@ function bg(props, theme) {
 
 function fg(props, theme) {
   const d = props.bold ? theme.bold : theme.text;
+
+  // Bold takes precedence if fg is undefined or 0
+  if (props.bold && !props.fg) {
+    return color(theme.bold, theme);
+  }
+
   const f = typeof props.fg === 'undefined' ? d : props.fg;
   return color(f, theme, d);
 }
