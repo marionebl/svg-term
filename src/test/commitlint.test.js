@@ -10,6 +10,13 @@ test('render commitlint', async () => {
   await example('commitlint.svg', result);
 });
 
+test('render commitlint', async () => {
+  expect.assertions(0);
+  const input = await fixture('example.json');
+  const result = render(input, {window: true, width: 80, height: 20});
+  await example('commitlint-sized.svg', result);
+});
+
 test('render commitlint 1 to 5', async () => {
   expect.assertions(0);
   const input = await fixture('example.json');

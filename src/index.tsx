@@ -67,11 +67,8 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
     throw new TypeError(`svg-term.reder: missing data`);
   }
 
-  const rawPaddingX = typeof options.paddingX === 'number' ? options.paddingX : 0;
-  const rawPaddingY = typeof options.paddingY === 'number' ? options.paddingY : 0;
-
-  const paddingX = options.window ? 12.5 : rawPaddingX;
-  const paddingY = options.window ? 40 : rawPaddingY;
+  const paddingX = typeof options.paddingX === 'number' ? options.paddingX : 0;
+  const paddingY = typeof options.paddingY === 'number' ? options.paddingY : 0;
 
   const theme = options.theme || DEFAULT_THEME;
   theme.fontSize = 'fontSize' in theme ? theme.fontSize : DEFAULT_THEME.fontSize;
@@ -103,8 +100,8 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
         width={data.width}
         height={data.displayHeight}
         theme={theme}
-        x={options.window ? 12.5 : options.paddingX}
-        y={options.window ? 40 : options.paddingY}
+        x={options.window ? 15 + paddingX : options.paddingX}
+        y={options.window ? 50 + paddingY : options.paddingY}
         >
         <StyledContainer fontSize={theme.fontSize}>
           <Registry
