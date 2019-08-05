@@ -89,6 +89,12 @@ interface Theme {
   cursor: RGBColor;
   /** Default text color */
   text: RGBColor
+  /** Default font size */
+  fontSize: number;
+  /** Default line height */
+  lineHeight: number;
+  /** Default font family */
+  fontFamily: string;
 }
 
 type RGBColor = [number, number, number];
