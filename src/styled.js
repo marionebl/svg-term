@@ -2,7 +2,7 @@ const React = require('react');
 const styled = require('@stiligita/core').default
 const react = require('@stiligita/react').default
 const {CREATE_COMPONENT, CREATE_SELECTOR, PROCESSOR, GET_NAME} = require('@stiligita/constants')
-const Abcq = require('abcq')
+const Abcq = require('abcq').default;
 const DEFAULT_THEME = require('./default-theme');
 
 const shortid = new Abcq()
