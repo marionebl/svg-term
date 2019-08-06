@@ -19,7 +19,7 @@ const toViewModel = require('./to-view-model');
 const DEFAULT_THEME = require('./default-theme');
 
 const StyledContainer = styled.g`
-  font-family: Monaco, Consolas, Menlo, 'Bitstream Vera Sans Mono', 'Powerline Symbols', monospace;
+  font-family: ${props => props.fontFamily};
 `;
 
 export interface SvgTermOptions {
@@ -60,6 +60,7 @@ export interface SvgTermTheme {
   text: SvgTermColor;
   fontSize: number;
   lineHeight: number;
+  fontFamily: string;
 }
 
 export function render(raw: string, options: SvgTermOptions = {}): string {
@@ -71,6 +72,7 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
   const paddingY = typeof options.paddingY === 'number' ? options.paddingY : 0;
 
   const theme = options.theme || DEFAULT_THEME;
+  theme.fontFamily = 'fontFamily' in theme ? theme.fontFamily : DEFAULT_THEME.fontFamily;
   theme.fontSize = 'fontSize' in theme ? theme.fontSize : DEFAULT_THEME.fontSize;
   theme.lineHeight = 'lineHeight' in theme ? theme.lineHeight : DEFAULT_THEME.lineHeight;
 
@@ -103,7 +105,7 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
         x={options.window ? 15 + paddingX : options.paddingX}
         y={options.window ? 50 + paddingY : options.paddingY}
         >
-        <StyledContainer fontSize={theme.fontSize}>
+        <StyledContainer fontFamily={theme.fontFamily} fontSize={theme.fontSize}>
           <Registry
             frameHeight={cast.height}
             frameWidth={cast.width}

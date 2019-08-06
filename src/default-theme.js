@@ -20,5 +20,6 @@ module.exports = {
   cursor: [111, 118, 131], // Cursor color
   text: [185, 192, 203], // Default text color,
   fontSize: 1.67,
-  lineHeight: 1.3
+  lineHeight: 1.3,
+  fontFamily: 'Monaco, Consolas, Menlo, \'Bitstream Vera Sans Mono\', \'Powerline Symbols\', monospace'
 };
