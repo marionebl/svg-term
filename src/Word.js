@@ -44,7 +44,8 @@ const StyledWordBackground = styled.rect`
 const StyledWord = styled.text`
   fill: ${TEXT_FILL};
   text-decoration: ${DECORATION};
-  font-weight: ${FONT_WEIGHT}
+  font-weight: ${FONT_WEIGHT};
+  white-space: pre;
 `;
 
 function bg(props, theme) {
