@@ -19,7 +19,7 @@ const toViewModel = require('./to-view-model');
 const DEFAULT_THEME = require('./default-theme');
 
 const StyledContainer = styled.g`
-  font-family: ${props => props.fontFamily};
+  font-family: ${(props: any) => props.fontFamily};
 `;
 
 export interface SvgTermOptions {
