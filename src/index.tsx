@@ -23,14 +23,20 @@ const StyledContainer = styled.g`
 `;
 
 export interface SvgTermOptions {
+  idle?: number,
+  fps?: number,
+
   at?: number;
   from?: number;
+  to?: number;
+
+  width?: number;
   height?: number;
+
   paddingX?: number;
   paddingY?: number;
+
   theme?: SvgTermTheme;
-  to?: number;
-  width?: number;
   window?: boolean;
   cursor?: boolean;
 }
@@ -77,7 +83,12 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
   theme.lineHeight = 'lineHeight' in theme ? theme.lineHeight : DEFAULT_THEME.lineHeight;
 
   const json = toJSON(raw);
-  const cast = load(json, options.width, typeof options.height === 'number' ? options.height + 1 : undefined);
+  const cast = load(json, {
+    width: options.width,
+    height: options.height ? options.height + 1 : undefined,
+    idle: options.idle ? options.idle / 1000 : undefined,
+    fps: options.fps
+  });
   const bound = {from: options.from, to: options.to, at: options.at, cast};
 
   const data = toViewModel({
