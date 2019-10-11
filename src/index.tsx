@@ -3,14 +3,11 @@ import {renderToStaticMarkup} from 'react-dom/server';
 
 const {load} = require('load-asciicast');
 
-const color = require('./color');
 const Background = require('./Background');
-const Cursor = require('./Cursor');
 const Document = require('./Document');
 const Frame = require('./Frame');
 const Reel = require('./Reel');
 const Registry = require('./Registry');
-const Viewbox = require('./Viewbox');
 const Window = require('./Window');
 const Word = require('./Word');
 const styled = require('./styled');
@@ -22,16 +19,17 @@ const StyledContainer = styled.g`
   font-family: ${(props: any) => props.fontFamily};
 `;
 
-export interface SvgTermOptions {
-  idle?: number,
-  fps?: number,
+export interface LoadCastOptions {
+  width?: number;
+  height?: number;
+  idle?: number;
+  fps?: number;
+}
 
+export interface SvgTermOptions extends LoadCastOptions {
   at?: number;
   from?: number;
   to?: number;
-
-  width?: number;
-  height?: number;
 
   paddingX?: number;
   paddingY?: number;
@@ -69,10 +67,8 @@ export interface SvgTermTheme {
   fontFamily: string;
 }
 
-export function render(raw: string, options: SvgTermOptions = {}): string {
-  if (!raw) {
-    throw new TypeError(`svg-term.reder: missing data`);
-  }
+export function render(input: any, options: SvgTermOptions = {}): string {
+  const cast = loadCast(input, options);
 
   const paddingX = typeof options.paddingX === 'number' ? options.paddingX : 0;
   const paddingY = typeof options.paddingY === 'number' ? options.paddingY : 0;
@@ -82,13 +78,6 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
   theme.fontSize = 'fontSize' in theme ? theme.fontSize : DEFAULT_THEME.fontSize;
   theme.lineHeight = 'lineHeight' in theme ? theme.lineHeight : DEFAULT_THEME.lineHeight;
 
-  const json = toJSON(raw);
-  const cast = load(json, {
-    width: options.width,
-    height: options.height ? options.height + 1 : undefined,
-    idle: options.idle ? options.idle / 1000 : undefined,
-    fps: options.fps
-  });
   const bound = {from: options.from, to: options.to, at: options.at, cast};
 
   const data = toViewModel({
@@ -194,11 +183,30 @@ export function render(raw: string, options: SvgTermOptions = {}): string {
   );
 }
 
-function toJSON(raw: any): string {
-  if (typeof raw === 'string') {
-    return raw;
+// `input` can be string/object of v1 or v2:
+// https://github.com/asciinema/asciinema/blob/develop/doc
+// or an already loaded cast:
+// https://github.com/marionebl/load-asciicast
+//
+// `options` won't take effect if `input` is an already loaded cast.
+function loadCast(input: any, options: LoadCastOptions = {}): any {
+  if (!input) {
+    throw new TypeError(`svg-term.reder: missing input`);
   }
-  return JSON.stringify(raw);
+
+  // An already loaded cast
+  if (input.frames) {
+    return input;
+  }
+
+  const raw = typeof input === 'string' ? input : JSON.stringify(input);
+  const {width, height, idle, fps} = options;
+  return load(raw, {
+    width,
+    height: height ? height + 1 : undefined,
+    idle: idle ? idle / 1000 : undefined,
+    fps
+  });
 }
 
 const NOOP = () => true;
