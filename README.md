@@ -40,6 +40,10 @@ interface Options {
   theme?: Theme;
   /** Render with a framing window, defaults to false */
   window?: boolean;
+  /** Idle time limit in milliseconds */
+  idle?: number,
+  /** Frames per second limit, see https://github.com/marionebl/svg-term/issues/13 */
+  fps?: number,
   /** Lower bound of timeline to render in milliseconds */
   from?: number;
   /** Upper bound of timeline to render in milliseconds */
