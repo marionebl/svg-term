@@ -1,5 +1,4 @@
 const React = require("react");
-const tag = require("tag-hoc").default;
 const color = require("./color");
 const styled = require("./styled");
 

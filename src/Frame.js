@@ -1,5 +1,4 @@
 const React = require('react');
-const tag = require('tag-hoc').default;
 
 module.exports = Frame;
 

@@ -6,7 +6,7 @@
 * Use custom themes
 * Share asciicast everywhere
 
-```
+```sh
 npm install svg-term
 ```
 
@@ -23,12 +23,17 @@ const {render} = require('svg-term');
   const svg = render(data);
   // => <svg>...</svg>
 })()
-
 ```
 
 ## API
 
 ```ts
+// `input` can be string/object of v1 or v2:
+// https://github.com/asciinema/asciinema/blob/develop/doc
+// or an already loaded cast:
+// https://github.com/marionebl/load-asciicast
+//
+// `options` won't take effect if `input` is an already loaded cast.
 render(input: string, options?: Options): string
 
 interface Options {
@@ -103,7 +108,6 @@ interface Theme {
 
 type RGBColor = [number, number, number];
 ```
-
 
 ---
 
