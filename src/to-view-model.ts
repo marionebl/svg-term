@@ -1,9 +1,19 @@
-const {flatMap, entries, groupBy, isEqual} = require('lodash');
-const hash = require('object-hash');
+import {flatMap, entries, groupBy, isEqual} from 'lodash';
+import hash from 'object-hash';
 
-module.exports = toViewModel;
+export interface ViewModelOptions {
 
-function toViewModel(options) {
+}
+
+export interface ViewModel {
+  width: number;
+  displayHeight: number;
+  frames: unknown[];
+  registry: unknown;
+  duration: number;
+}
+
+export function toViewModel(options: ViewModelOptions): ViewModel {
   const {cursor: cursorOption, cast, theme, from, to} = options;
   const liner = getLiner(cast);
   const stamps = cast.frames

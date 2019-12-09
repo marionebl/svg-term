@@ -1,9 +1,9 @@
-const React = require('react');
-const styled = require('@stiligita/core').default
-const react = require('@stiligita/react').default
-const {CREATE_COMPONENT, CREATE_SELECTOR, PROCESSOR, GET_NAME} = require('@stiligita/constants')
-const Abcq = require('abcq').default;
-const DEFAULT_THEME = require('./default-theme');
+import React from 'react';
+import styled from '@stiligita/core';
+import react from '@stiligita/react';
+import { CREATE_COMPONENT, CREATE_SELECTOR, PROCESSOR, GET_NAME } from '@stiligita/constants';
+import Abcq from 'abcq';
+import DEFAULT_THEME from './default-theme';
 
 const shortid = new Abcq()
 
@@ -69,4 +69,4 @@ styled
   .use(shortId)
   .use(createClassName)
 
-module.exports = styled;
+export default styled;

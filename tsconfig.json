@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "esModuleInterop": true,
     "jsx": "react",
     "lib": ["es2015"],
     "module": "commonjs",
-    "noImplicitAny": true,
     "outDir": "lib/",
     "pretty": true,
     "sourceMap": true,
+    "strict": true,
     "target": "es2015",
-    "types": ["node"]
+    "typeRoots": ["./typings"],
+    "types": ["node"],
   },
   "exclude": [
     "lib/**/*.js",

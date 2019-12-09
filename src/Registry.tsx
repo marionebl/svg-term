@@ -1,11 +1,27 @@
-const React = require('react');
-const Cursor = require('./Cursor');
-const Word = require('./Word');
-const styled = require('./styled');
+import * as React from 'react';
+import styled from '@emotion/styled';
+import {Cursor} from './Cursor';
+import {Word} from './Word';
 
-module.exports = Registry;
+export interface RegistryItem extends LineSymbolProps {
+  type: 'line' | string;
+  id: string;
+}
 
-function Registry(props) {
+export interface RegistryProps {
+  items: RegistryItem[];
+  theme: {
+    fontSize: number;
+    lineHeight: number;
+    cursor: string;
+  };
+  hasFrames: boolean;
+  frameHeight: number;
+  frameWidth: number;
+  hasCursors: boolean;
+}
+
+export const Registry: React.FunctionComponent<RegistryProps> = (props) => {
   return (
     <defs>
       {props.items.map(item => {
@@ -13,7 +29,7 @@ function Registry(props) {
           case 'line':
             return <LineSymbol key={item.id} theme={props.theme} {...item}/>;
           default:
-            throw new TypeEror(`Unknown Registry item of type ${item.type}`);
+            throw new TypeError(`Unknown Registry item of type ${item.type}`);
         }
       })}
       {props.hasFrames && [
@@ -29,7 +45,7 @@ function Registry(props) {
             <symbol id="b" key="b">
               <Cursor
                 height={props.theme.fontSize * props.theme.lineHeight}
-                theme={props.theme}
+                fill={props.theme.cursor}
                 width={props.theme.fontSize * 0.66}
                 />
             </symbol>
@@ -40,7 +56,32 @@ function Registry(props) {
   );
 }
 
-function LineSymbol(props) {
+export interface LineWordProps {
+  attr: {
+    inverse?: boolean;
+    bg?: boolean;
+    bold?: boolean;
+    underline?: boolean;
+    fg?: string;
+  }
+  children: string;
+  x: number;
+  y: number;
+  theme: {
+    lineHeight: number;
+  }
+}
+
+export interface LineSymbolProps {
+  id: string;
+  words: LineWordProps[];
+  theme: {
+    fontSize: number;
+    lineHeight: number;
+  }
+}
+
+const LineSymbol: React.FunctionComponent<LineSymbolProps> = (props) => {
   return (
     <symbol id={props.id}>
       {props.words.map((word, index) => (

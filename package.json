@@ -61,11 +61,15 @@
     "xmldom": "^0.1.27"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
     "@stiligita/constants": "^1.0.0-0",
     "@stiligita/core": "^1.0.0-0",
     "@stiligita/keyframes": "^1.0.0-0",
     "@stiligita/react": "^1.0.0-0",
     "@stiligita/stylesheets": "^1.0.0-0",
+    "@types/lodash": "^4.14.149",
+    "@types/object-hash": "^1.3.0",
     "abcq": "^1.0.2",
     "ansi-to-rgb": "^1.0.0",
     "load-asciicast": "^2.0.0",
