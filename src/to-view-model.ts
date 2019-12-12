@@ -1,32 +1,62 @@
 import {flatMap, entries, groupBy, isEqual} from 'lodash';
 import hash from 'object-hash';
+import { LoadedCast, LoadedFrame } from './load-cast';
+import { Theme } from './default-theme';
+import { VersionOneFrame, VersionZeroFrame, Line, Cursor, Attributes } from 'load-asciicast';
 
 export interface ViewModelOptions {
-
+  cursor?: boolean;
+  cast: LoadedCast;
+  from: number;
+  to: number;
+  theme: Theme;
+  height?: number;
 }
 
 export interface ViewModel {
-  width: number;
   displayHeight: number;
-  frames: unknown[];
-  registry: unknown;
+  displayWidth: number;
   duration: number;
+  frames: ViewFrame[];
+  height: number;
+  registry: RegistryItem[];
+  stamps: number[];
+  width: number;
 }
+
+export interface ViewFrame {
+  cursor: Cursor;
+  lines: {
+      y: number;
+      words: Word[];
+      hash: string;
+      ref: null;
+  }[];
+  stamp: number;
+}
+
+export interface RegistryItem {
+  type: string;
+  words: Word[];
+  id: number;
+}
+
+type AnyFrame = LoadedFrame<VersionOneFrame | VersionZeroFrame>;
 
 export function toViewModel(options: ViewModelOptions): ViewModel {
   const {cursor: cursorOption, cast, theme, from, to} = options;
-  const liner = getLiner(cast);
-  const stamps = cast.frames
-    .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
-    .map(([stamp], i) => stamp - from);
+  const loadedFrames: AnyFrame[] = cast.frames;
+  const stamps = loadedFrames
+    .filter(([stamp]) => stamp >= from && stamp <= to)
+    .map(([stamp]) => stamp - from);
   const fontSize = theme.fontSize;
   const lineHeight = theme.lineHeight;
   const height = typeof options.height === 'number' ? options.height : cast.height;
 
-  const frames = cast.frames
-    .filter(([stamp], i, fs) => stamp >= from && stamp <= to)
-    .map(([delta, data], i) => [delta, data, liner(data)])
-    .map(([stamp, data, l], index) => {
+  const frames = loadedFrames
+    .filter(([stamp]) => stamp >= from && stamp <= to)
+    .map(([delta, data]) => [delta, data, liner(data)] as const)
+    .map(([stamp, data, l]) => {
       const lines = l
         .map((chars, y) => {
           const words = toWords(chars);
@@ -39,7 +69,7 @@ export function toViewModel(options: ViewModelOptions): ViewModel {
           };
         });
 
-      const cursor = data.cursor || data.screen.cursor;
+      const cursor = getCursor(data);
       const cl = lines[cursor.y] || {y: 0};
 
       cursor.x = cursor.x + 2;
@@ -53,7 +83,7 @@ export function toViewModel(options: ViewModelOptions): ViewModel {
       };
     });
 
-  const candidates = flatMap(frames, 'lines').filter(line => line.words.length > 0);
+  const candidates: (typeof frames[0])["lines"] = flatMap(frames, 'lines').filter(line => line.words.length > 0);
   const hashes = groupBy(candidates, 'hash');
 
   const registry = entries(hashes)
@@ -67,7 +97,7 @@ export function toViewModel(options: ViewModelOptions): ViewModel {
           .filter(line => line.hash === hash)
           .forEach(l => {
             l.words = [];
-            l.id = id;
+            (l as any).id = id;
           });
       });
 
@@ -76,7 +106,7 @@ export function toViewModel(options: ViewModelOptions): ViewModel {
 
   return {
     width: cast.width,
-    displayWidth: cast.witdh,
+    displayWidth: cast.width,
     height: cast.height,
     displayHeight: height * fontSize * lineHeight,
     duration: to - from,
@@ -86,18 +116,36 @@ export function toViewModel(options: ViewModelOptions): ViewModel {
   };
 }
 
-function getLiner(cast) {
-  switch (cast.version) {
-    case 0:
-      return (data) => toOne(data.lines);
-    default:
-      return (data) => data.screen.lines;
+function getCursor(data: VersionOneFrame | VersionZeroFrame): Cursor {
+  if (data.hasOwnProperty('cursor')) {
+    const frame = data as VersionZeroFrame;
+    return frame.cursor;
   }
+
+  const frame = data as VersionOneFrame;
+  return frame.screen.cursor;
 }
 
-function toWords(chars) {
+function liner(data: VersionZeroFrame | VersionOneFrame): Line[] {
+  if (data.hasOwnProperty('lines')) {
+    const frame = data as VersionZeroFrame;
+    return toOne(frame.lines);
+  }
+
+  const frame = data as VersionOneFrame;
+  return frame.screen.lines;
+}
+
+interface Word {
+  attr: Attributes;
+  x: number;
+  children: string;
+  offset: number;
+}
+
+function toWords(chars: Line): Word[] {
   return chars
-    .reduce((words, [point, attr]) => {
+    .reduce<Word[]>((words, [point, attr]) => {
       if (words.length === 0) {
         words.push({
           attr,
@@ -128,13 +176,12 @@ function toWords(chars) {
 
       return words;
     }, [])
-    .filter((word, i, words) => {
+    .filter((word) => {
       if ('bg' in word.attr || word.attr.inverse) {
         return true;
       }
 
       const trimmed = word.children.trim();
-      const after = words.slice(i + 1);
 
       if ((trimmed === '' || trimmed === '⏎')) {
         return false;
@@ -144,13 +191,13 @@ function toWords(chars) {
     });
 }
 
-function toOne(arrayLike) {
+function toOne(arrayLike: any): any {
   return Object.entries(arrayLike)
-    .sort((a, b) => a[0] - b[0])
+    .sort((a: any, b: any) => a[0] - b[0])
     .map(e => e[1])
-    .map(words => words.reduce((chars, word) => {
+    .map((words: any) => words.reduce((chars: any, word: any) => {
       const [content, attr] = word;
-      chars.push(...content.split('').map(char => [char.codePointAt(0), attr]));
+      chars.push(...content.split('').map((char: any) => [char.codePointAt(0), attr]));
       return chars;
     }, []), []);
 }

@@ -1,11 +1,21 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
-import {Cursor} from './Cursor';
-import {Word} from './Word';
+import * as React from "react";
+import styled from "@emotion/styled";
+import { Cursor } from "./Cursor";
+import { Word } from "./Word";
+import { Attributes } from "load-asciicast";
+import { RGBTuple } from "./default-theme";
 
-export interface RegistryItem extends LineSymbolProps {
-  type: 'line' | string;
-  id: string;
+export interface RegistryWord {
+  attr: Attributes;
+  x: number;
+  children: string;
+  offset: number;
+}
+
+export interface RegistryItem {
+  type: "line" | string;
+  id: string | number;
+  words: RegistryWord[];
 }
 
 export interface RegistryProps {
@@ -13,7 +23,7 @@ export interface RegistryProps {
   theme: {
     fontSize: number;
     lineHeight: number;
-    cursor: string;
+    cursor: RGBTuple;
   };
   hasFrames: boolean;
   frameHeight: number;
@@ -21,13 +31,13 @@ export interface RegistryProps {
   hasCursors: boolean;
 }
 
-export const Registry: React.FunctionComponent<RegistryProps> = (props) => {
+export const Registry: React.FunctionComponent<RegistryProps> = props => {
   return (
     <defs>
       {props.items.map(item => {
-        switch(item.type) {
-          case 'line':
-            return <LineSymbol key={item.id} theme={props.theme} {...item}/>;
+        switch (item.type) {
+          case "line":
+            return <LineSymbol key={item.id} theme={props.theme} {...item} />;
           default:
             throw new TypeError(`Unknown Registry item of type ${item.type}`);
         }
@@ -39,22 +49,21 @@ export const Registry: React.FunctionComponent<RegistryProps> = (props) => {
             width={props.frameWidth}
             x="0"
             y="0"
-            />
+          />
         </symbol>,
         props.hasCursors && (
-            <symbol id="b" key="b">
-              <Cursor
-                height={props.theme.fontSize * props.theme.lineHeight}
-                fill={props.theme.cursor}
-                width={props.theme.fontSize * 0.66}
-                />
-            </symbol>
-          )
-        ]
-      }
+          <symbol id="b" key="b">
+            <Cursor
+              height={props.theme.fontSize * props.theme.lineHeight}
+              fill={props.theme.cursor}
+              width={props.theme.fontSize * 0.66}
+            />
+          </symbol>
+        )
+      ]}
     </defs>
   );
-}
+};
 
 export interface LineWordProps {
   attr: {
@@ -62,28 +71,28 @@ export interface LineWordProps {
     bg?: boolean;
     bold?: boolean;
     underline?: boolean;
-    fg?: string;
-  }
+    fg?: number | string;
+  };
   children: string;
   x: number;
-  y: number;
-  theme: {
-    lineHeight: number;
-  }
+  // y: number;
+  // theme: {
+  //   lineHeight: number;
+  // };
 }
 
 export interface LineSymbolProps {
-  id: string;
+  id: string | number;
   words: LineWordProps[];
   theme: {
     fontSize: number;
     lineHeight: number;
-  }
+  };
 }
 
-const LineSymbol: React.FunctionComponent<LineSymbolProps> = (props) => {
+const LineSymbol: React.FunctionComponent<LineSymbolProps> = props => {
   return (
-    <symbol id={props.id}>
+    <symbol id={String(props.id)}>
       {props.words.map((word, index) => (
         <Word
           bg={word.attr.bg}
@@ -95,13 +104,13 @@ const LineSymbol: React.FunctionComponent<LineSymbolProps> = (props) => {
           underline={word.attr.underline}
           x={word.x}
           y={props.theme.fontSize}
-          >
+        >
           {word.children}
         </Word>
       ))}
     </symbol>
   );
-}
+};
 
 const StyledBackground = styled.rect`
   fill: transparent;

@@ -8,7 +8,7 @@ export interface WordProps {
   bg?: boolean;
   bold?: boolean;
   underline?: boolean;
-  fg?: string;
+  fg?: string | number;
   children: string;
   x: number;
   y: number;

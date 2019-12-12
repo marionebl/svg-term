@@ -3,7 +3,7 @@
     "allowJs": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["es2015"],
+    "lib": ["es2015", "dom"],
     "module": "commonjs",
     "outDir": "lib/",
     "pretty": true,
@@ -14,10 +14,6 @@
     "types": ["node"],
   },
   "exclude": [
-    "lib/**/*.js",
-    "src/test/**/*.js",
-    "src/test/**/*.ts",
-    "src/**/*.test.js",
-    "src/**/*.test.ts"
+    "lib/**/*.js"
   ]
 }

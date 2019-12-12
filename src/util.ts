@@ -1,21 +1,26 @@
+type Frame = readonly [number, unknown];
+
 interface NearestOptions {
-  cast: any;
+  cast: { frames: Frame[] };
   max?: number;
   min?: number;
 }
 
 interface ClampOptions {
-  cast: any;
+  cast: { frames: Frame[]; duration: number };
   at?: number;
   from?: number;
   to?: number;
 }
 
-const NOOP = () => true;
-const MAX = (max: number) => ([f]: any) => f <= max;
-const MIN = (min: number) => ([f]: any) => f >= min;
+type NoopPredicate = (frame: unknown) => boolean;
+type FramePredicate = (frame: Frame) => boolean;
 
-function nearest(stamp: number, { cast, max, min }: NearestOptions) {
+const NOOP = (_: unknown): NoopPredicate => () => true;
+const MAX = (max: number): FramePredicate => ([f]: Frame) => f <= max;
+const MIN = (min: number): FramePredicate => ([f]: Frame) => f >= min;
+
+function nearest(stamp: number, { cast, max, min }: NearestOptions): number {
   return cast.frames
     .filter(typeof max === "number" && !isNaN(max) ? MAX(max) : NOOP)
     .filter(typeof min === "number" && !isNaN(min) ? MIN(min) : NOOP)
@@ -24,7 +29,7 @@ function nearest(stamp: number, { cast, max, min }: NearestOptions) {
     )[0][0];
 }
 
-export function from(options: ClampOptions) {
+export function from(options: ClampOptions): number {
   const { at, from, cast } = options;
   if (typeof at === "number") {
     return nearest(at / 1000, { cast });
@@ -34,12 +39,12 @@ export function from(options: ClampOptions) {
     : 0;
 }
 
-export function to(options: ClampOptions) {
-  const { at, from, to, cast } = options;
+export function to(options: ClampOptions): number {
+  const { at, to, cast } = options;
   if (typeof at === "number") {
     return nearest(at / 1000, { cast });
   }
-  return typeof to === "number" && !isNaN(from)
+  return typeof to === "number" && !isNaN(to)
     ? nearest(to / 1000, { cast, max: to / 1000 })
     : cast.duration;
 }
