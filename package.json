@@ -4,7 +4,8 @@
   "description": "Share terminal sessions via SVG and CSS",
   "main": "lib/index.js",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "build": "tsc",
