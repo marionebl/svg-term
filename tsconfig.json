@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
     "jsx": "react",
     "lib": ["es2015", "dom"],
     "module": "commonjs",
     "outDir": "lib/",
+    "rootDir": "src/",
     "pretty": true,
     "sourceMap": true,
     "strict": true,
     "target": "es2015",
-    "typeRoots": ["./typings"],
-    "types": ["node"],
+    "types": ["node"]
   },
-  "exclude": [
-    "lib/**/*.js"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "typings/**/*.d.ts"]
 }
