@@ -1,6 +1,6 @@
 {
   "name": "svg-term",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Share terminal sessions via SVG and CSS",
   "main": "lib/index.js",
   "files": [
