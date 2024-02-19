@@ -51,7 +51,6 @@ export function toViewModel(options: ViewModelOptions): ViewModel {
     .map(([stamp]) => stamp - from);
   const fontSize = theme.fontSize;
   const lineHeight = theme.lineHeight;
-  const height = typeof options.height === 'number' ? options.height : cast.height;
 
   const frames = loadedFrames
     .filter(([stamp]) => stamp >= from && stamp <= to)
@@ -108,7 +107,7 @@ export function toViewModel(options: ViewModelOptions): ViewModel {
     width: cast.width,
     displayWidth: cast.width,
     height: cast.height,
-    displayHeight: height * fontSize * lineHeight,
+    displayHeight: cast.height * fontSize * lineHeight,
     duration: to - from,
     registry,
     stamps,
