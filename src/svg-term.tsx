@@ -42,14 +42,14 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
   return (
     <Window
       decorations={props.decorations}
-      width={data.width}
+      width={data.displayWidth}
       height={data.displayHeight}
       background={props.theme.background}
       paddingX={props.paddingX}
       paddingY={props.paddingY}
     >
       <Document
-        width={data.width}
+        width={data.displayWidth}
         height={data.displayHeight}
         x={props.decorations ? 15 + props.paddingX : props.paddingX}
         y={props.decorations ? 50 + props.paddingY : props.paddingY}
@@ -67,7 +67,7 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
             theme={props.theme}
           />
           <Background
-            width={data.width}
+            width={data.displayWidth}
             height={data.displayHeight}
             fill={props.theme.background}
           />
