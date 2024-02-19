@@ -81,7 +81,7 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
           >
             {data.frames.map((frame: any, index: number) => {
               return (
-                <Frame key={frame.stamp} offset={index} width={data.width}>
+                <Frame key={frame.stamp} offset={index} width={data.displayWidth} height={data.displayHeight}>
                   {frame.cursor.visible && (
                     <use
                       xlinkHref="#b"
