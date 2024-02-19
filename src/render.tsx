@@ -48,7 +48,6 @@ export function render(
       paddingY={paddingY}
       decorations={decorations}
       cursor={cursor}
-      height={options.height}
     />
   );
 }

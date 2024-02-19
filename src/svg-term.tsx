@@ -17,7 +17,6 @@ export interface SvgTermProps {
   theme: Theme;
   paddingX: number;
   paddingY: number;
-  height?: number;
   decorations: boolean;
   from?: number;
   to?: number;
@@ -35,7 +34,6 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
   const data = toViewModel({
     cast: props.cast,
     cursor: props.cursor,
-    height: props.height,
     theme: props.theme,
     from: from(bound),
     to: to(bound)

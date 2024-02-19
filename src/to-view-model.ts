@@ -10,7 +10,6 @@ export interface ViewModelOptions {
   from: number;
   to: number;
   theme: Theme;
-  height?: number;
 }
 
 export interface ViewModel {
