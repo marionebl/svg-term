@@ -28,7 +28,7 @@ export const Word: React.FunctionComponent<WordProps> = props => {
           height={props.theme.fontSize * props.theme.lineHeight}
           inverse={props.inverse}
           width={props.children.length > 0 ? props.children.length : 0}
-          x={props.x * props.theme.fontSize * 0.6}
+          x={props.x}
           y={props.y - props.theme.fontSize}
         />
       )}
@@ -39,7 +39,7 @@ export const Word: React.FunctionComponent<WordProps> = props => {
         inverse={props.inverse}
         theme={props.theme}
         underline={props.underline}
-        x={props.x * props.theme.fontSize * 0.6}
+        x={props.x}
         y={props.y}
       >
         {props.children}
