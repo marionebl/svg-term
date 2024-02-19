@@ -11,7 +11,7 @@ export function loadCast(input: string, options: LoadOptions = {}): Cast {
   const { width, height, idle, fps } = options;
   return load(input, {
     width,
-    height: height ? height + 1 : undefined,
+    height,
     idle: idle ? idle / 1000 : undefined,
     fps
   });

@@ -17,7 +17,6 @@ export interface SvgTermProps {
   theme: Theme;
   paddingX: number;
   paddingY: number;
-  height?: number;
   decorations: boolean;
   from?: number;
   to?: number;
@@ -35,7 +34,6 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
   const data = toViewModel({
     cast: props.cast,
     cursor: props.cursor,
-    height: props.height,
     theme: props.theme,
     from: from(bound),
     to: to(bound)
@@ -44,14 +42,14 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
   return (
     <Window
       decorations={props.decorations}
-      width={data.width}
+      width={data.displayWidth}
       height={data.displayHeight}
       background={props.theme.background}
       paddingX={props.paddingX}
       paddingY={props.paddingY}
     >
       <Document
-        width={data.width}
+        width={data.displayWidth}
         height={data.displayHeight}
         x={props.decorations ? 15 + props.paddingX : props.paddingX}
         y={props.decorations ? 50 + props.paddingY : props.paddingY}
@@ -69,7 +67,7 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
             theme={props.theme}
           />
           <Background
-            width={data.width}
+            width={data.displayWidth}
             height={data.displayHeight}
             fill={props.theme.background}
           />
@@ -81,7 +79,7 @@ export const SvgTerm: React.FunctionComponent<SvgTermProps> = props => {
           >
             {data.frames.map((frame: any, index: number) => {
               return (
-                <Frame key={frame.stamp} offset={index} width={data.width}>
+                <Frame key={frame.stamp} offset={index} width={data.displayWidth} height={data.displayHeight}>
                   {frame.cursor.visible && (
                     <use
                       xlinkHref="#b"
